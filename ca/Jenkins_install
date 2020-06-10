@@ -1,0 +1,43 @@
+pipeline {
+    agent { label 'HIPSTER1' }
+    environment {
+        CA_CUSTOMER = 'CyberArmor'
+        CA_USERNAME = 'bhirschb@cyberarmor.io'
+        CA_PASSWORD = 'hNCdWupE4u'
+    }
+    stages {
+        stage('Login to CyberArmor') {
+            steps {
+                sh '''
+                cacli login -e development -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
+                '''
+            }
+        }
+        
+        stage('Install CyberArmor in cluster') {
+            steps {
+                sh '''
+                kubectl delete namespace cyberarmor-system || true
+                cacli cluster unregister -n HipsterShopCluster || true
+                '''
+                sh '''
+                cacli cluster register -n HipsterShopCluster -o install.sh
+                '''
+                sh '''
+                ./install.sh
+                kubectl create namespace dev || true
+                kubectl create namespace prod || true
+                kubectl label namespace dev injectCyberArmor=add
+                kubectl label namespace prod injectCyberArmor=add
+                '''
+            }
+        }
+        
+        stage('Add basic policy') {
+            steps {
+                sh 'cacli np delete -n hipster-shop-prod || true'
+                sh 'cacli np create -i ./ca/basic-policy.yaml'
+            }
+        }
+    }
+}

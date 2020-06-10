@@ -42,14 +42,14 @@ spec:
         #   value: "1"
         - name: DISABLE_PROFILER
           value: "1"
-        readinessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 8080
-        livenessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 8080
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:8080"]
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:8080"]
         resources:
           requests:
             cpu: 100m
@@ -89,14 +89,12 @@ spec:
           image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.2.0
           ports:
           - containerPort: 5050
-          readinessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 5050
-          livenessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 5050
+          # readinessProbe:
+          #   exec:
+          #     command: ["/bin/grpc_health_probe", "-addr=:5050"]
+          # livenessProbe:
+          #   exec:
+          #     command: ["/bin/grpc_health_probe", "-addr=:5050"]
           env:
           - name: PORT
             value: "5050"
@@ -160,14 +158,14 @@ spec:
         image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.2.0
         ports:
         - containerPort: 8080
-        readinessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 8080
-        livenessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 8080
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:8080"]
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:8080"]
         env:
         - name: PORT
           value: "8080"
@@ -220,14 +218,22 @@ spec:
           image: gcr.io/google-samples/microservices-demo/frontend:v0.2.0
           ports:
           - containerPort: 8080
-          readinessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 8080
-          livenessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 8080
+          # readinessProbe:
+          #   initialDelaySeconds: 10
+          #   httpGet:
+          #     path: "/_healthz"
+          #     port: 8080
+          #     httpHeaders:
+          #     - name: "Cookie"
+          #       value: "shop_session-id=x-readiness-probe"
+          # livenessProbe:
+          #   initialDelaySeconds: 10
+          #   httpGet:
+          #     path: "/_healthz"
+          #     port: 8080
+          #     httpHeaders:
+          #     - name: "Cookie"
+          #       value: "shop_session-id=x-liveness-probe"
           env:
           - name: PORT
             value: "8080"
@@ -309,14 +315,12 @@ spec:
         env:
         - name: PORT
           value: "50051"
-        readinessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 50051
-        livenessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 50051
+        # readinessProbe:
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:50051"]
+        # livenessProbe:
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:50051"]
         resources:
           requests:
             cpu: 100m
@@ -368,14 +372,12 @@ spec:
         #   value: "1"
         # - name: JAEGER_SERVICE_ADDR
         #   value: "jaeger-collector:14268"
-        readinessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 3550
-        livenessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 3550
+        # readinessProbe:
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:3550"]
+        # livenessProbe:
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:3550"]
         resources:
           requests:
             cpu: 100m
@@ -430,14 +432,15 @@ spec:
           limits:
             cpu: 300m
             memory: 128Mi
-        readinessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 7070
-        livenessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 7070
+        # readinessProbe:
+        #   initialDelaySeconds: 15
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
+        # livenessProbe:
+        #   initialDelaySeconds: 15
+        #   periodSeconds: 10
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
 ---
 apiVersion: v1
 kind: Service
@@ -515,14 +518,12 @@ spec:
         #   value: "1"
         # - name: DISABLE_DEBUGGER
         #   value: "1"
-        readinessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 7000
-        livenessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 7000
+        # readinessProbe:
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:7000"]
+        # livenessProbe:
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:7000"]
         resources:
           requests:
             cpu: 100m
@@ -573,14 +574,13 @@ spec:
         #   value: "1"
         # - name: JAEGER_SERVICE_ADDR
         #   value: "jaeger-collector:14268"
-        readinessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 50051
-        livenessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 50051
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:50051"]
+        # livenessProbe:
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:50051"]
         resources:
           requests:
             cpu: 100m
@@ -620,14 +620,14 @@ spec:
         image: redis:alpine
         ports:
         - containerPort: 6379
-        readinessProbe:
-          periodSeconds: 5
-          tcpSocket:
-            port: 6379
-        livenessProbe:
-          periodSeconds: 5
-          tcpSocket:
-            port: 6379
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   tcpSocket:
+        #     port: 6379
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   tcpSocket:
+        #     port: 6379
         volumeMounts:
         - mountPath: /data
           name: redis-data
@@ -690,14 +690,16 @@ spec:
           limits:
             cpu: 300m
             memory: 300Mi
-        readinessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 9550
-        livenessProbe:
-            initialDelaySeconds: 10
-            tcpSocket:
-              port: 9550
+        # readinessProbe:
+        #   initialDelaySeconds: 20
+        #   periodSeconds: 15
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:9555"]
+        # livenessProbe:
+        #   initialDelaySeconds: 20
+        #   periodSeconds: 15
+        #   exec:
+        #     command: ["/bin/grpc_health_probe", "-addr=:9555"]
 ---
 apiVersion: v1
 kind: Service
