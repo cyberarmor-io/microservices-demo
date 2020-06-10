@@ -46,7 +46,7 @@ spec:
             initialDelaySeconds: 10
             tcpSocket:
               port: 8080
-          livenessProbe:
+        livenessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: 8080
@@ -164,7 +164,7 @@ spec:
             initialDelaySeconds: 10
             tcpSocket:
               port: 8080
-          livenessProbe:
+        livenessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: 8080
@@ -313,7 +313,7 @@ spec:
             initialDelaySeconds: 10
             tcpSocket:
               port: 50051
-          livenessProbe:
+        livenessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: 50051
@@ -372,7 +372,7 @@ spec:
             initialDelaySeconds: 10
             tcpSocket:
               port: 3550
-          livenessProbe:
+        livenessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: 3550
@@ -434,7 +434,7 @@ spec:
             initialDelaySeconds: 10
             tcpSocket:
               port: 7070
-          livenessProbe:
+        livenessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: 7070
@@ -519,7 +519,7 @@ spec:
             initialDelaySeconds: 10
             tcpSocket:
               port: 7000
-          livenessProbe:
+        livenessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: 7000
@@ -577,7 +577,7 @@ spec:
             initialDelaySeconds: 10
             tcpSocket:
               port: 50051
-          livenessProbe:
+        livenessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: 50051
@@ -694,7 +694,7 @@ spec:
             initialDelaySeconds: 10
             tcpSocket:
               port: 9550
-          livenessProbe:
+        livenessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: 9550
