@@ -1,10 +1,5 @@
 pipeline {
     agent { label 'HIPSTER1' }
-    environment {
-        CA_CUSTOMER = 'CyberArmor'
-        CA_USERNAME = 'bhirschb@cyberarmor.io'
-        CA_PASSWORD = 'hNCdWupE4u'
-    }
     stages {
         stage('Login to CyberArmor') {
             steps {
