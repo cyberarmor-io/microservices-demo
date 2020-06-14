@@ -11,7 +11,7 @@ do
 	        container_name=`cacli wt get -wlid $wlid | python -c "import json,sys;print json.load(sys.stdin)['containers'][0]['name']"`
 	        cacli sp generate -wlid $wlid -n $container_name -spn signing-profile-$DEPLOYMENT &> log.txt || (echo Failed to generate for $DEPLOYMENT && cat log.txt)
 # patch_loadgenerator.py
-		if [ ${DEPLOYMENT} == *"loadgenerator"* ] ;then
+		if [ $DEPLOYMENT == "loadgenerator" ] ;then
                         echo Patching loadgenerator
                         cacli sp get -n signing-profile-$DEPLOYMENT | python3 ca/patch_loadgenerator.py > sp.json
 			cat sp.json
