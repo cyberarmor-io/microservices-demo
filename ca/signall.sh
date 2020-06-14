@@ -12,7 +12,9 @@ do
 	        cacli sp generate -wlid $wlid -n $container_name -spn signing-profile-$DEPLOYMENT &> log.txt || (echo Failed to generate for $DEPLOYMENT && cat log.txt)
 # patch_loadgenerator.py
 		if [ ${DEPLOYMENT} == *"loadgenerator"* ] ;then
+                        echo Patching loadgenerator
                         cacli sp get -n signing-profile-$DEPLOYMENT | python3 ca/patch_loadgenerator.py > sp.json
+			cat sp.json
                         cacli sp apply -i sp.json
                 fi
 		wlid_prod="wlid://cluster-$CLUSTER/namespace-$NAMESPACE_PROD/deployment-$DEPLOYMENT"

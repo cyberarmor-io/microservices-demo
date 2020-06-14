@@ -12,6 +12,7 @@ pipeline {
                 sh '''
                 kubectl create namespace dev || true
                 kubectl -n dev apply -f release/kubernetes-manifests.yaml
+                kubectl -n dev apply -f ingress_dev.yaml
                 '''
             }
         }
