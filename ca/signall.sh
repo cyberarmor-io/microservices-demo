@@ -15,7 +15,8 @@ do
                         echo Patching loadgenerator
                         cacli sp get -n signing-profile-$DEPLOYMENT | python3 ca/patch_loadgenerator.py > sp.json
 			cat sp.json
-                        cacli sp apply -i sp.json
+			cacli sp delete -n signing-profile-$DEPLOYMENT
+                        cacli sp create -i sp.json
                 fi
 		wlid_prod="wlid://cluster-$CLUSTER/namespace-$NAMESPACE_PROD/deployment-$DEPLOYMENT"
 	        cacli wt get -wlid $wlid | sed 's/dev/prod/g' > tmp.json
