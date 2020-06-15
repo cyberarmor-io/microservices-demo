@@ -16,10 +16,14 @@ pipeline {
                 cacli cluster unregister -n HipsterShopCluster || true
                 '''
                 sh '''
+                cacli wt list | python -c "import json,sys;d=json.load(sys.stdin);print('\n'.join(filter(lambda s: s.count('cluster-hipsterShop'),d)))" | xargs -L1 cacli cleanup -wlid $@  || true
+                '''
+                sh '''
                 cacli cluster register -n HipsterShopCluster -o install.sh
                 '''
                 sh '''
-                ./install.sh
+                ./install.sh -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
+                sleep 80
                 kubectl create namespace dev || true
                 kubectl create namespace prod || true
                 kubectl label namespace dev injectCyberArmor=add

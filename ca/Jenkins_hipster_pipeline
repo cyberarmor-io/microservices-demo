@@ -12,7 +12,6 @@ pipeline {
                 sh '''
                 kubectl create namespace dev || true
                 kubectl -n dev apply -f release/kubernetes-manifests.yaml
-                kubectl -n dev apply -f ingress_dev.yaml
                 '''
             }
         }
@@ -38,7 +37,7 @@ pipeline {
                 sh '''
                 kubectl create namespace prod || true
                 kubectl -n prod apply -f release/kubernetes-manifests.yaml
-                kubectl -n prod apply -f ingress.yaml
+                kubectl -n prod apply -f ~/hipster-app/ing.yaml
                 '''
             }
         }
