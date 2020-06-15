@@ -13,16 +13,27 @@ do
 # patch_loadgenerator.py
 		if [ $DEPLOYMENT == "loadgenerator" ] ;then
                         echo Patching loadgenerator
-                        cacli sp get -n signing-profile-$DEPLOYMENT | python3 ca/patch_loadgenerator.py > sp.json
-			cat sp.json
+			tmpfile=$(mktemp /tmp/sp.XXXXXX)
+                        cacli sp get -n signing-profile-$DEPLOYMENT | python3 ca/patch_loadgenerator.py > "$tmpfile"
 			cacli sp delete -n signing-profile-$DEPLOYMENT
-                        cacli sp create -i sp.json
+                        cacli sp create -i "$tmpfile"
+			rm "$tmpfile"
                 fi
 		wlid_prod="wlid://cluster-$CLUSTER/namespace-$NAMESPACE_PROD/deployment-$DEPLOYMENT"
-	        cacli wt get -wlid $wlid | sed 's/dev/prod/g' > tmp.json
-	        cacli wt apply -i tmp.json
-		cat tmp.json
+		tmpfile=$(mktemp /tmp/wt.XXXXXX)
+	        cacli wt get -wlid $wlid | sed 's/dev/prod/g' > "$tmpfile"
+	        cacli wt apply -i "$tmpfile"
+		rm "$tmpfile"
 	        cacli sign -wlid $wlid_prod -c $container_name
+	        #cacli sign -wlid $wlid_prod -c $container_name &
+		#pids[${DEPLOYMENT}]=$!
 	        echo Signed $DEPLOYMENT
 done
+
+
+#for pid in ${pids[*]}; do
+#    wait $pid
+#    echo Done $pid
+#done
+
 
