@@ -2,9 +2,18 @@
 CLUSTER=HipsterShopCluster
 NAMESPACE=dev
 NAMESPACE_PROD=prod
-DEPLOYMENT=$@
+DEPLOYMENT=$0
+OLD_IMAGE_TAG=$1
+NEW_IMAGE_TAG=$2
 
 wlid="wlid://cluster-$CLUSTER/namespace-$NAMESPACE/deployment-$DEPLOYMENT"
+
+# update wt with new image tag
+tmpfile=$(mktemp /tmp/sp.XXXXXX)
+  cacli wt get -wlid $wlid | sed 's/'"$OLD_IMAGE_TAG"'/'"$NEW_IMAGE_TAG"'/g' > "$tmpfile"
+  cacli wt apply -i "$tmpfile"
+rm "$tmpfile"
+
 cacli sp delete -n signing-profile-$DEPLOYMENT &> /dev/null
 container_name=`cacli wt get -wlid $wlid | python -c "import json,sys;print json.load(sys.stdin)['containers'][0]['name']"`
 for _ in {1..5}; do
