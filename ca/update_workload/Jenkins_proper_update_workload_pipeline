@@ -43,6 +43,7 @@ pipeline {
             steps {
                 sh '''
                 kubectl set image deployment/redis-cart -n prod redis=redis:5-alpine
+                kubectl -n prod delete pod $(kubectl -n prod get pods | grep redis-cart | awk '{print $1}') || true
                 '''
             }
         }

@@ -6,33 +6,28 @@
     "enforcementAction": "block",
     "serverList": [
         {
-            "designatorType": "attribute",
-            "wlid": "",
+            "designatorType": "wlid",
+            "wlid": "wlid://cluster-HipsterShopCluster/namespace-prod/deployment-redis-cart",
             "wildwlid": "",
             "groupName": "",
-            "ports": [80],
-            "attributes": {
-                "namespace": "prod",
-                "cluster": "HipsterShopCluster",
-                "app": "frontend"
-            },
+            "ports": [],
+            "attributes": {},
             "k8sServiceName": "",
             "k8sServiceIP": "0.0.0.0/0",
             "k8sServicePorts": [],
             "ipRanges": [],
-            "portRanges": []
+            "portRanges": [
+                "start": 80,
+                "end": 65535
+            ]
         }
     ],
     "clientList": [
         {
-            "designatorType": "attribute",
-            "wlid": "",
+            "designatorType": "wlid",
+            "wlid": "wlid://cluster-HipsterShopCluster/namespace-prod/deployment-cartservice",
             "wildwlid": "",
-            "attributes": {
-                "namespace": "prod",
-                "cluster": "HipsterShopCluster",
-                "app": "loadgenerator"
-            }
+            "attributes": {}
         }
     ]
 }
