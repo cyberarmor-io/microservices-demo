@@ -20,9 +20,14 @@ pipeline {
                 '''
                 sh '''
                 cacli cluster register -n HipsterShopCluster -o install.sh
-                '''
-                sh '''
                 ./install.sh -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
+                '''
+            }
+        }
+
+        stage('Injecting CyberArmor in namespaces') {
+            steps {
+                sh '''
                 sleep 80
                 kubectl create namespace dev || true
                 kubectl create namespace prod || true
