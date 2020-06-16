@@ -9,7 +9,17 @@ do
 	        wlid="wlid://cluster-$CLUSTER/namespace-$NAMESPACE/deployment-$DEPLOYMENT"
 	        cacli sp delete -n signing-profile-$DEPLOYMENT &> /dev/null
 	        container_name=`cacli wt get -wlid $wlid | python -c "import json,sys;print json.load(sys.stdin)['containers'][0]['name']"`
-	        cacli sp generate -wlid $wlid -n $container_name -spn signing-profile-$DEPLOYMENT &> log.txt || (echo Failed to generate for $DEPLOYMENT && cat log.txt)
+#	        cacli sp generate -wlid $wlid -n $container_name -spn signing-profile-$DEPLOYMENT &> log.txt || (echo Failed to generate for $DEPLOYMENT && cat log.txt)
+          for _ in {1..5}; do
+            cacli sp generate -wlid $wlid -n $container_name -spn signing-profile-$DEPLOYMENT &> log.txt
+            RESULT=$?
+            if [ "$RESULT" -eq 0 ]; then
+              break
+            else
+              echo Failed to generate for "$DEPLOYMENT" && cat log.txt
+              sleep 30
+            fi
+          done
 # patch_loadgenerator.py
 		if [ $DEPLOYMENT == "loadgenerator" ] ;then
                         echo Patching loadgenerator

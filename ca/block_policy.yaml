@@ -1,0 +1,38 @@
+{
+    "name": "block-hipster-shop-prod",
+    "attributes": null,
+    "policyType": "",
+    "permissions": "deny",
+    "enforcementAction": "block",
+    "serverList": [
+        {
+            "designatorType": "attribute",
+            "wlid": "",
+            "wildwlid": "",
+            "groupName": "",
+            "ports": [80],
+            "attributes": {
+                "namespace": "prod",
+                "cluster": "HipsterShopCluster",
+                "app": "frontend"
+            },
+            "k8sServiceName": "",
+            "k8sServiceIP": "0.0.0.0/0",
+            "k8sServicePorts": [],
+            "ipRanges": [],
+            "portRanges": []
+        }
+    ],
+    "clientList": [
+        {
+            "designatorType": "attribute",
+            "wlid": "",
+            "wildwlid": "",
+            "attributes": {
+                "namespace": "prod",
+                "cluster": "HipsterShopCluster",
+                "app": "loadgenerator"
+            }
+        }
+    ]
+}

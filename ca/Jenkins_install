@@ -40,6 +40,7 @@ pipeline {
         stage('Add basic policy') {
             steps {
                 sh 'cacli np delete -n hipster-shop-prod || true'
+                sh 'cacli np delete -n block-hipster-shop-prod || true'
                 sh 'cacli np create -i ./ca/basic-policy.yaml'
             }
         }
