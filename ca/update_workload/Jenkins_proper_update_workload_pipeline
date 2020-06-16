@@ -10,12 +10,7 @@ pipeline {
         stage('deploy in dev environment') {
             steps {
                 sh '''
-                kubectl -n dev delete -f ./ca/update_workload/update-redis-image.yaml
-                kubectl -n prod delete -f ./ca/update_workload/update-redis-image.yaml
-                cacli cleanup -wlid wlid://cluster-HipsterShopCluster/namespace-dev/deployment-redis-cart
-                cacli cleanup -wlid wlid://cluster-HipsterShopCluster/namespace-prod/deployment-redis-cart
-
-                kubectl -n dev apply -f ./ca/update_workload/update-redis-image.yaml
+                kubectl set image deployment/redis-cart -n dev redis=redis:5-alpine
                 '''
             }
         }
@@ -28,7 +23,7 @@ pipeline {
             }
         }
 
-        stage('signing workloads') {
+        stage('sign workload') {
             steps {
             sh '''
             ./ca/update_workload/signone.sh redis-cart
@@ -47,7 +42,7 @@ pipeline {
         stage('deploy in prod environment') {
             steps {
                 sh '''
-                kubectl -n prod apply -f ./ca/update_workload/update-redis-image.yaml
+                kubectl set image deployment/redis-cart -n prod redis=redis:5-alpine
                 '''
             }
         }
@@ -55,7 +50,7 @@ pipeline {
         stage('liveliness test') {
             steps {
                 sh '''
-                sleep 5
+                sleep 120
                 kubectl -n prod delete pod $(kubectl -n prod get pods | grep frontend | awk '{print $1}')
                 sleep 5
                 '''
