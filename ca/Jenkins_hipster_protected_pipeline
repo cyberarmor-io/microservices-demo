@@ -20,7 +20,7 @@ pipeline {
         stage('system test') {
             steps {
                 sh '''
-                sleep 120
+                sleep 180
                 '''
             }
         }
