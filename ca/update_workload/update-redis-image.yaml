@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: redis
-#        image: redis:6.0.5
-        image: redis:alpine
+        image: redis:6.0.5
+#        image: redis:alpine
         ports:
         - containerPort: 6379
         # readinessProbe:
