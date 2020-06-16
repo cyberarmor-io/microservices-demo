@@ -26,7 +26,7 @@ pipeline {
         stage('sign workload') {
             steps {
             sh '''
-            ./ca/update_workload/signone.sh redis-cart redis:alpine redis:5-alpine
+            ./ca/update_workload/signone.sh
             '''
             }
         }
