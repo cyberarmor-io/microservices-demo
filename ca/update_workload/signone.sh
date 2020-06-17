@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 CLUSTER=HipsterShopCluster
 NAMESPACE=dev
 NAMESPACE_PROD=prod
@@ -14,8 +15,8 @@ tmpfile=$(mktemp /tmp/sp.XXXXXX)
   cacli wt apply -i "$tmpfile"
 rm "$tmpfile"
 
-cacli sp delete -n signing-profile-$DEPLOYMENT &> /dev/null
 container_name=`cacli wt get -wlid $wlid | python -c "import json,sys;print json.load(sys.stdin)['containers'][0]['name']"`
+cacli sp delete -n signing-profile-$DEPLOYMENT &> /dev/null
 for _ in {1..5}; do
   cacli sp generate -wlid $wlid -n $container_name -spn signing-profile-$DEPLOYMENT &> log.txt
   RESULT=$?
