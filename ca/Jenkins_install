@@ -41,7 +41,7 @@ pipeline {
                 sleep 120
                 kubectl create namespace dev || true
                 kubectl label namespace dev injectCyberArmor=add
-                sleep 60
+                sleep 80
                 kubectl create namespace prod || true
                 kubectl label namespace prod injectCyberArmor=add
                 '''
