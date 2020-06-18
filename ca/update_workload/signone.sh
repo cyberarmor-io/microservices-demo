@@ -4,8 +4,8 @@ CLUSTER=HipsterShopCluster
 NAMESPACE=dev
 NAMESPACE_PROD=prod
 DEPLOYMENT=redis-cart
-OLD_IMAGE_TAG=redis:5-alpine
-NEW_IMAGE_TAG=redis:alpine
+OLD_IMAGE_TAG=redis:alpine
+NEW_IMAGE_TAG=redis:5-alpine
 
 wlid="wlid://cluster-$CLUSTER/namespace-$NAMESPACE/deployment-$DEPLOYMENT"
 

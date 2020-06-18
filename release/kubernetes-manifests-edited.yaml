@@ -663,7 +663,7 @@ spec:
     spec:
       containers:
       - name: redis
-        image: redis:alpine
+        image: redis:5-alpine
         ports:
         - containerPort: 6379
         # readinessProbe:
