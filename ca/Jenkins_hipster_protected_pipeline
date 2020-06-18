@@ -28,7 +28,7 @@ pipeline {
         stage('processing workload data') {
             steps {
                 sh '''
-                sleep 1
+                sleep 60
                 '''
             }
         }
@@ -39,7 +39,7 @@ pipeline {
             cd ca
             ./signall.sh
             cd ..
-            sleep 60
+            sleep 120
             '''
             }
         }
