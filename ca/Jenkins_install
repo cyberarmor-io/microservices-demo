@@ -35,13 +35,14 @@ pipeline {
             }
         }
 
-        stage('Injecting CyberArmor in namespaces') {
+        stage('I njecting CyberArmor in namespaces') {
             steps {
                 sh '''
                 sleep 120
                 kubectl create namespace dev || true
-                kubectl create namespace prod || true
                 kubectl label namespace dev injectCyberArmor=add
+                sleep 30
+                kubectl create namespace prod || true
                 kubectl label namespace prod injectCyberArmor=add
                 '''
             }
