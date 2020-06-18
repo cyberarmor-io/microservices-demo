@@ -28,7 +28,7 @@ pipeline {
         stage('processing workload data') {
             steps {
                 sh '''
-                sleep 60
+                sleep 1
                 '''
             }
         }
