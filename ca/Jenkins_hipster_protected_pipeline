@@ -36,10 +36,7 @@ pipeline {
         stage('signing workloads') {
             steps {
             sh '''
-            cd ca
-            ./signall.sh
-            sleep 10
-            cd ..
+            ./ca/signall.sh
             '''
             }
         }
@@ -66,7 +63,7 @@ pipeline {
         stage('liveliness test') {
             steps {
                 sh '''
-                sleep 120
+                sleep 30
                 kubectl -n prod delete pod $(kubectl -n prod get pods | grep frontend | awk '{print $1}')
                 sleep 5
                 '''
