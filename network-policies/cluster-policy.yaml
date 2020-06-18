@@ -1,0 +1,41 @@
+{
+    "name": "HipsterShop-Cross-Namespace-Deny-Policy",
+    "attributes": null,
+    "policyType": "corss-namesapce-control",
+    "permissions": "deny",
+    "enforcementAction": "block",
+    "serverList": [
+        {
+            "designatorType": "attribute",
+            "wlid": "",
+            "wildwlid": "",
+            "groupName": "",
+            "ports": [],
+            "attributes": {
+                "namespace": "prod",
+                "cluster": "HipsterShopCluster"
+            },
+            "k8sServiceName": "",
+            "k8sServiceIP": "0.0.0.0/0",
+            "k8sServicePorts": [],
+            "ipRanges": [],
+            "portRanges": [
+                {
+                    "start": 80,
+                    "end": 65535
+                }
+            ]
+        }
+    ],
+    "clientList": [
+        {
+            "designatorType": "attribute",
+            "wlid": "",
+            "wildwlid": "",
+            "attributes": {
+                "namespace": "dev",
+                "cluster": "HipsterShopCluster"
+            }
+        }
+    ]
+}

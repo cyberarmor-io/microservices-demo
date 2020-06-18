@@ -1,23 +1,14 @@
 #!/bin/bash
-set -x
+
 CLUSTER=HipsterShopCluster
 NAMESPACE=dev
 NAMESPACE_PROD=prod
-DEPLOYMENT=redis-cart
-OLD_IMAGE_TAG=redis:alpine
-NEW_IMAGE_TAG=redis:5-alpine
+DEPLOYMENT="$@"
 
 wlid="wlid://cluster-$CLUSTER/namespace-$NAMESPACE/deployment-$DEPLOYMENT"
-
-# update wt with new image tag
-tmpfile=$(mktemp /tmp/sp.XXXXXX)
-cacli wt get -wlid $wlid | sed 's/'"$OLD_IMAGE_TAG"'/'"$NEW_IMAGE_TAG"'/g' > "$tmpfile"
-cat "$tmpfile"
-cacli wt apply -i "$tmpfile"
-rm "$tmpfile"
-
-container_name=`cacli wt get -wlid $wlid | python3 -c "import json,sys;print(json.load(sys.stdin)['containers'][0]['name'])"`
 cacli sp delete -n signing-profile-$DEPLOYMENT &> /dev/null
+container_name=`cacli wt get -wlid $wlid | python3 -c "import json,sys;print(json.load(sys.stdin)['containers'][0]['name'])"`
+
 for _ in {1..5}; do
   cacli sp generate -wlid $wlid -n $container_name -spn signing-profile-$DEPLOYMENT &> log.txt
   RESULT=$?
@@ -28,6 +19,7 @@ for _ in {1..5}; do
     sleep 30
   fi
 done
+
 # patch_loadgenerator.py
 if [ $DEPLOYMENT == "loadgenerator" ] ;then
   echo Patching loadgenerator
@@ -43,13 +35,6 @@ cacli wt get -wlid $wlid | sed 's/dev/prod/g' > "$tmpfile"
 cacli wt apply -i "$tmpfile"
 rm "$tmpfile"
 cacli sign -wlid $wlid_prod -c $container_name
-#cacli sign -wlid $wlid_prod -c $container_name &
+      #cacli sign -wlid $wlid_prod -c $container_name &
 #pids[${DEPLOYMENT}]=$!
 echo Signed $DEPLOYMENT
-
-#for pid in ${pids[*]}; do
-#    wait $pid
-#    echo Done $pid
-#done
-
-

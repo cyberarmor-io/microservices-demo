@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh '''
                 kubectl set image deployment/redis-cart -n prod redis=redis:alpine
-                kubectl -n dev apply -f release/kubernetes-manifests.yaml
+                kubectl -n dev apply -f release/kubernetes-manifests-edited.yaml
                 '''
             }
         }
@@ -43,7 +43,7 @@ pipeline {
         stage('deploy in prod environment') {
             steps {
                 sh '''
-                kubectl -n prod apply -f release/kubernetes-manifests.yaml
+                kubectl -n prod apply -f release/kubernetes-manifests-edited.yaml
                 '''
             }
         }

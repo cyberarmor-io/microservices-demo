@@ -1,7 +1,7 @@
 {
-    "name": "hipster-shop-prod",
+    "name": "HipsterShop-Basic-Policy",
     "attributes": null,
-    "policyType": "",
+    "policyType": "basic-zero-trust",
     "permissions": "allow",
     "enforcementAction": "block",
     "serverList": [

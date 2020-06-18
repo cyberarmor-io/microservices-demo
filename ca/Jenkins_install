@@ -39,9 +39,11 @@ pipeline {
         
         stage('Add basic policy') {
             steps {
-                sh 'cacli np delete -n hipster-shop-prod || true'
-                sh 'cacli np delete -n block-hipster-shop-prod || true'
-                sh 'cacli np create -i ./ca/basic-policy.yaml'
+                sh 'cacli np delete -n HipsterShop-Basic-Policy || true'
+                sh 'cacli np delete -n HipsterShop-Cross-Namespace-Deny-Policy || true'
+                sh 'cacli np delete -n HipsterShop-Block-Policy || true'
+                sh 'cacli np create -i ./network-policies/basic-policy.yaml'
+                sh 'cacli np create -i ./network-policies/cluster-policy.yaml'
             }
         }
     }
