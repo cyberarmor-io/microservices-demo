@@ -36,7 +36,9 @@ pipeline {
         stage('signing workloads') {
             steps {
             sh '''
-            ./ca/signall.sh
+            cd ca
+            ./signall.sh
+            cd ..
             '''
             }
         }
