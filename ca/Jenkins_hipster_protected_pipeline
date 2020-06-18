@@ -37,7 +37,7 @@ pipeline {
             steps {
             sh '''
             cd ca
-            ./ca/signall.sh
+            ./signall.sh
             cd ..
             sleep 60
             '''
