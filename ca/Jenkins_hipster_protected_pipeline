@@ -11,6 +11,7 @@ pipeline {
             steps {
                 sh '''
                 kubectl create namespace dev || true
+                kubectl label namespace dev injectCyberArmor=add || true
                 kubectl -n dev apply -f release/kubernetes-manifests.yaml
                 kubectl -n dev apply -f ingress_dev.yaml
                 '''
@@ -45,7 +46,7 @@ pipeline {
             steps {
                 sh '''
                 kubectl create namespace prod || true
-                kubectl -n prod delete -f release/kubernetes-manifests.yaml || true
+                kubectl label namespace prod injectCyberArmor=add || true
                 kubectl -n prod apply -f release/kubernetes-manifests.yaml
                 kubectl -n prod apply -f ingress.yaml
                 '''

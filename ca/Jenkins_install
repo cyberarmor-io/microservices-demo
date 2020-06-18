@@ -25,18 +25,6 @@ pipeline {
             }
         }
 
-        stage('Injecting CyberArmor in namespaces') {
-            steps {
-                sh '''
-                sleep 80
-                kubectl create namespace dev || true
-                kubectl create namespace prod || true
-                kubectl label namespace dev injectCyberArmor=add
-                kubectl label namespace prod injectCyberArmor=add
-                '''
-            }
-        }
-        
         stage('Add basic policy') {
             steps {
                 sh 'cacli np delete -n HipsterShop-Basic-Policy || true'
