@@ -4,7 +4,7 @@ set -x
 CLUSTER=HipsterShopCluster
 NAMESPACE=dev
 NAMESPACE_PROD=prod
-DEPLOYMENT="$0"
+DEPLOYMENT="$1"
 
 wlid="wlid://cluster-$CLUSTER/namespace-$NAMESPACE/deployment-$DEPLOYMENT"
 cacli sp delete -n signing-profile-$DEPLOYMENT &> /dev/null
