@@ -1,9 +1,10 @@
 {
-    "name": "HipsterShop-Basic-Policy",
+    "name": "HipsterShop-Ingress-Policy",
     "attributes": null,
-    "policyType": "basic",
+    "policyType": "explicit",
     "permissions": "allow",
     "enforcementAction": "block",
+    "permissiveMode": True,
     "serverList": [
         {
             "designatorType": "attribute",
@@ -12,7 +13,7 @@
             "groupName": "",
             "ports": [],
             "attributes": {
-                "namespace": "prod",
+                "app": "nginx-ingress",
                 "cluster": "HipsterShopCluster"
             },
             "k8sServiceName": "",
@@ -34,8 +35,8 @@
             ],
             "portRanges": [
                 {
-                    "start": 80,
-                    "end": 65535
+                    "start": 30000,
+                    "end": 30001
                 }
             ]
         }
