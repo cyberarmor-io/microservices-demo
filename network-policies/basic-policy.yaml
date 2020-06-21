@@ -1,7 +1,7 @@
 {
     "name": "HipsterShop-Basic-Policy",
     "attributes": null,
-    "policyType": "basic",
+    "policyType": "",
     "permissions": "allow",
     "enforcementAction": "block",
     "serverList": [
