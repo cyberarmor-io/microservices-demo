@@ -34,7 +34,7 @@
             "wlid": "",
             "wildwlid": "",
             "attributes": {
-                "namespace": "prod",
+                "app": "adservice",
                 "cluster": "HipsterShopCluster"
             }
         }
