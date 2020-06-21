@@ -1,0 +1,24 @@
+{
+    "name": "HipsterShop-Cross-Namespace-Deny-Policy",
+    "policyType": "corss-namesapce-control",
+    "permissions": "deny",
+    "enforcementAction": "block",
+    "serverList": [
+        {
+            "designatorType": "attribute",
+            "attributes": {
+                "namespace": "prod",
+                "cluster": "HipsterShopCluster"
+            }
+        }
+    ],
+    "clientList": [
+        {
+            "designatorType": "attribute",
+            "attributes": {
+                "namespace": "dev",
+                "cluster": "HipsterShopCluster"
+            }
+        }
+    ]
+}
