@@ -34,7 +34,7 @@ pipeline {
                 sh 'cacli np create -i ./network-policies/ingress-policy.yaml'
                 sh 'cacli np create -i ./network-policies/basic-policy.yaml'
 
-                sh 'cacli ec create -wlid wlid://cluster-HipsterShopCluster/namespace-prod/deployment-nginx-ingress -c nginx-ingress -kid 99d368694eb64f4d9eef46a60c18af82 -p /etc/nginx/ssl --gradual_encryption'
+                sh 'cacli ec create -wlid wlid://cluster-HipsterShopCluster/namespace-prod/deployment-nginx-ingress -c nginx-ingress -kid 99d368694eb64f4d9eef46a60c18af82 -p /etc/nginx/ssl'
                 // sh 'cacli np create -i ./network-policies/cluster-policy.yaml'
             }
         }
