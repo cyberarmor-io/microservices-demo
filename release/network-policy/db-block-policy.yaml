@@ -1,14 +1,14 @@
 {
-    "name": "HipsterShop-DB-Execution-Block-Policy",
-    "policyType": "execution-block-policy",
+    "name": "HipsterShop-DB-Block-Policy",
+    "policyType": "storage-block-policy",
     "permissions": "deny",
     "enforcementAction": "block",
     "serverList": [
         {
             "designatorType": "attribute",
             "attributes": {
-                "storage": "redis",
-                "namespace": "prod",
+              "storage": "redis",
+              "namespace": "prod",
                 "cluster": "HipsterShopCluster"
             }
         }
@@ -17,8 +17,7 @@
         {
             "designatorType": "attribute",
             "attributes": {
-                "storage": "redis",
-                "service": "checkout",
+                "tair": "frontend",
                 "namespace": "prod",
                 "cluster": "HipsterShopCluster"
             }
