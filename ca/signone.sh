@@ -16,7 +16,7 @@ cacli sp generate -wlid $wlid -n $container_name -spn signing-profile-$DEPLOYMEN
 if [ $DEPLOYMENT == "loadgenerator" ] ;then
   echo Patching loadgenerator
   tmpfile=$(mktemp /tmp/sp.XXXXXX)
-  cacli sp get -n signing-profile-$DEPLOYMENT | python3 ca/patch_loadgenerator.py > "$tmpfile"
+  cacli sp get -n signing-profile-$DEPLOYMENT | python3 patch_loadgenerator.py > "$tmpfile"
   cacli sp delete -n signing-profile-$DEPLOYMENT
   cacli sp create -i "$tmpfile"
   rm "$tmpfile"
