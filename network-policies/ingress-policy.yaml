@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop-Ingress-Policy",
+    "name": "HipsterShop-A-Ingress-Policy",
     "attributes": null,
     "policyType": "explicit",
     "permissions": "allow",

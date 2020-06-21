@@ -23,16 +23,19 @@ data:
         }
         http {
             server {
-                listen      30000;
-                listen [::]:30000;
+                listen      30000 ssl;
+                listen [::]:30000 ssl;
                 location / {
                     proxy_set_header Host $host;
                     proxy_set_header X-Real-IP $remote_addr;
                     proxy_pass http://frontend:80;
                 }
+            ssl_certificate     /etc/nginx/ssl/tls.crt;
+            ssl_certificate_key /etc/nginx/ssl/tls.key;
+            ssl_ciphers         EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH;
+            ssl_protocols       TLSv1.1 TLSv1.2;
             }
         }
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -60,6 +63,9 @@ spec:
         - mountPath: /etc/nginx # mount nginx-conf volumn to /etc/nginx
           readOnly: true
           name: nginx-conf
+        - mountPath: "/etc/nginx/ssl"
+          name: nginx-ssl
+          readOnly: false
       volumes:
       - name: nginx-conf
         configMap:
@@ -67,3 +73,6 @@ spec:
           items:
             - key: nginx.conf
               path: nginx.conf
+      - name: nginx-ssl
+        secret:
+          secretName: nginx-ssl

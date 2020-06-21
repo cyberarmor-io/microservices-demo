@@ -31,8 +31,8 @@ pipeline {
                 sh 'cacli np delete -n HipsterShop-Ingress-Policy || true'
                 sh 'cacli np delete -n HipsterShop-Cross-Namespace-Deny-Policy || true'
                 sh 'cacli np delete -n HipsterShop-Block-Policy || true'
-                sh 'cacli np create -i ./network-policies/basic-policy.yaml'
                 sh 'cacli np create -i ./network-policies/ingress-policy.yaml'
+                sh 'cacli np create -i ./network-policies/basic-policy.yaml'
                 // sh 'cacli np create -i ./network-policies/cluster-policy.yaml'
             }
         }
