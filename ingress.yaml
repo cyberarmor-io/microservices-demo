@@ -57,6 +57,9 @@ spec:
         securityContext:
           capabilities:
             add: ["SYS_PTRACE"]
+        env:
+          - name: CAA_LITTLE_BOY
+            value: "1"
         ports:
         - containerPort: 30000
         volumeMounts:
