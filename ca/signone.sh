@@ -31,6 +31,6 @@ cacli wt get -wlid $wlid | sed 's/dev/prod/g' > "$tmpfile"
 cacli wt apply -i "$tmpfile" && rm "$tmpfile"
 
 cacli sign -wlid $wlid_prod -c $container_name
-      #cacli sign -wlid $wlid_prod -c $container_name &
+#cacli sign -wlid $wlid_prod -c $container_name &
 #pids[${DEPLOYMENT}]=$!
 echo Signed $DEPLOYMENT

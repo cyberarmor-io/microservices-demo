@@ -1,16 +1,11 @@
 {
-    "name": "HipsterShop-Block-Policy",
+    "name": "HipsterShop-DB-Execution-Block-Policy",
     "policyType": "execution-block-policy",
     "permissions": "deny",
     "enforcementAction": "block",
     "serverList": [
         {
             "designatorType": "attribute",
-            "k8sServiceIP": "0.0.0.0/0",
-            "portRanges": [
-              "start": 80,
-              "end": 65535
-            ]
             "attributes": {
                 "storage": "redis",
                 "namespace": "prod",

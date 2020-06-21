@@ -1,18 +1,12 @@
 {
-    "name": "HipsterShop-Block-Policy",
-    "policyType": "execution-block-policy",
+    "name": "HipsterShop-Cross-Namespace-Deny-Policy",
+    "policyType": "corss-namesapce-control",
     "permissions": "deny",
     "enforcementAction": "block",
     "serverList": [
         {
             "designatorType": "attribute",
-            "k8sServiceIP": "0.0.0.0/0",
-            "portRanges": [
-              "start": 80,
-              "end": 65535
-            ]
             "attributes": {
-                "storage": "redis",
                 "namespace": "prod",
                 "cluster": "HipsterShopCluster"
             }
@@ -22,9 +16,7 @@
         {
             "designatorType": "attribute",
             "attributes": {
-                "storage": "redis",
-                "service": "checkout",
-                "namespace": "prod",
+                "namespace": "dev",
                 "cluster": "HipsterShopCluster"
             }
         }
