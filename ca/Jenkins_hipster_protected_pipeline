@@ -58,7 +58,7 @@ pipeline {
                 kubectl create namespace prod || true
                 kubectl delete --all pods --namespace=prod
                 kubectl -n prod apply -f release/kubernetes-manifests.yaml
-                kubectl -n prod create secret tls nginx-ssl --key ca-nginx-tls.key --cert ca-nginx-tls.crt || true
+                kubectl -n prod create secret tls nginx-ssl --key ca-nginx-tls.key.enc --cert ca-nginx-tls.crt.enc || true
                 kubectl -n prod apply -f ingress.yaml
                 '''
             }
