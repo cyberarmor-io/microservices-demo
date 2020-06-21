@@ -9,7 +9,7 @@ pipeline {
             }
         }
         
-        stage('Install CyberArmor in cluster') {
+        stage('Install CyberArmor In Cluster') {
             steps {
                 sh '''
                 kubectl delete namespace cyberarmor-system || true
@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Add basic policy') {
+        stage('Add Basic Policy') {
             steps {
                 sh 'cacli np delete -n HipsterShop-Basic-Policy || true'
                 sh 'cacli np delete -n HipsterShop-Ingress-Policy || true'
@@ -39,7 +39,7 @@ pipeline {
             }
         }
 
-        stage('Injecting CyberArmor in namespaces') {
+        stage('Attaching CyberArmor to Namespaces') {
             steps {
                 sh '''
                 sleep 120
