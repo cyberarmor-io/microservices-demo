@@ -9,7 +9,7 @@ DEPLOYMENT="$1"
 wlid="wlid://cluster-$CLUSTER/namespace-$NAMESPACE/deployment-$DEPLOYMENT"
 cacli sp delete -n signing-profile-$DEPLOYMENT &> /dev/null
 container_name=`cacli wt get -wlid $wlid | python3 -c "import json,sys;print(json.load(sys.stdin)['containers'][0]['name'])"`
-
+echo "wlid: $wlid, container_name: $container_name"
 cacli sp generate -wlid $wlid -n $container_name -spn signing-profile-$DEPLOYMENT &> log.txt ||  (echo Failed to generate for "$DEPLOYMENT" && cat log.txt)
 
 # patch_loadgenerator.py
@@ -24,8 +24,8 @@ fi
 wlid_prod="wlid://cluster-$CLUSTER/namespace-$NAMESPACE_PROD/deployment-$DEPLOYMENT"
 tmpfile=$(mktemp /tmp/wt.XXXXXX)
 cacli wt get -wlid $wlid | sed 's/dev/prod/g' > "$tmpfile"
-cacli wt apply -i "$tmpfile"
-rm "$tmpfile"
+cacli wt apply -i "$tmpfile" && rm "$tmpfile"
+
 cacli sign -wlid $wlid_prod -c $container_name
       #cacli sign -wlid $wlid_prod -c $container_name &
 #pids[${DEPLOYMENT}]=$!
