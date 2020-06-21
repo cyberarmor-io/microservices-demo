@@ -1,0 +1,19 @@
+{
+    "name": "HipsterShop-Debugger-Deny-Policy",
+    "policyType": "execution-guard",
+    "subjectList": [
+        {
+            "designatorType": "attribute",
+            "attributes": {
+                "namespace": "prod",
+                "cluster": "HipsterShopCluster"
+            }
+        }
+    ],
+    "eventResponseList": [
+        {
+            "executionEvent": "debugger-attach",
+            "response": "stop-process"
+        }
+    ]
+}

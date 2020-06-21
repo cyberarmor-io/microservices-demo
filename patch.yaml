@@ -1,0 +1,16 @@
+spec:
+  template:
+    spec:
+      volumes:
+      - name: cyberarmor-local
+        hostPath:
+          path: /home/pmon/Desktop/it0/caa/build_alpine/src
+          type: DirectoryOrCreate
+      containers:
+      - name: ca-controller-webhook
+        env:
+        - name: OVERRIDE_AGENT
+          value: "/cyberarmor-local/libcaa.so"
+        volumeMounts:
+        - name: cyberarmor-local
+          mountPath: "/cyberarmor-local"
