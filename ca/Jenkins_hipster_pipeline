@@ -37,7 +37,8 @@ pipeline {
                 sh '''
                 kubectl create namespace prod || true
                 kubectl -n prod apply -f release/kubernetes-manifests.yaml
-                kubectl -n prod apply -f ~/hipster-app/ing.yaml
+                kubectl -n prod create secret tls nginx-ssl --key ca-nginx-tls.key --cert ca-nginx-tls.crt
+                kubectl -n prod apply -f ingress.yaml
                 '''
             }
         }
