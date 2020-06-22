@@ -33,6 +33,7 @@ pipeline {
                 sh 'cacli np delete -n HipsterShop-Block-HipsterShop-Block-Adservice-Policy || true'
                 sh 'cacli np create -i ./network-policies/ingress-policy.yaml'
                 sh 'cacli np create -i ./network-policies/basic-policy.yaml'
+                sh 'cacli np create -i ./network-policies/cluster-policy.yaml'
                 sh 'kubectl -n prod delete secret nginx-ssl || true'
                 sh 'kubectl -n prod create secret generic nginx-ssl --from-file=tls.key=ca-nginx-tls.key.enc --from-file=tls.crt=ca-nginx-tls.crt.enc'
                 sh 'cacli ec create -wlid wlid://cluster-HipsterShopCluster/namespace-prod/deployment-nginx-ingress -c nginx-ingress -kid 99d368694eb64f4d9eef46a60c18af82 -p /etc/nginx/ssl'
