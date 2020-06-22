@@ -1,0 +1,24 @@
+{
+    "name": "HipsterShop-Block-Frontend-Policy",
+    "attributes": null,
+    "policyType": "",
+    "permissions": "deny",
+    "enforcementAction": "block",
+    "serverList": [
+        {
+            "designatorType": "attribute",
+            "wlid": "",
+            "wildwlid": "",
+            "groupName": "",
+            "attributes": { "storage": "redis" },
+        }
+    ],
+    "clientList": [
+        {
+            "designatorType": "wlid",
+            "wlid": "wlid://cluster-HipsterShopCluster/namespace-prod/deployment-frontend",
+            "wildwlid": "",
+            "attributes": {}
+        }
+    ]
+}

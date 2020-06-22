@@ -14,17 +14,7 @@
             "attributes": {
                 "namespace": "prod",
                 "cluster": "HipsterShopCluster"
-            },
-            "k8sServiceName": "",
-            "k8sServiceIP": "8.8.8.8/32",
-            "k8sServicePorts": [],
-            "ipRanges": [],
-            "portRanges": [
-                {
-                    "start": 65534,
-                    "end": 65535
-                }
-            ]
+            }
         }
     ],
     "clientList": [

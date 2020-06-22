@@ -1,9 +1,10 @@
 {
-    "name": "HipsterShop-Cross-Namespace-Deny-Policy",
+    "name": "HipsterShop-A-Ingress-Policy",
     "attributes": null,
-    "policyType": "corss-namesapce-control",
-    "permissions": "deny",
+    "policyType": "ingress",
+    "permissions": "allow",
     "enforcementAction": "block",
+    "permissiveMode": True,
     "serverList": [
         {
             "designatorType": "attribute",
@@ -12,19 +13,9 @@
             "groupName": "",
             "ports": [],
             "attributes": {
-                "namespace": "prod",
+                "app": "nginx-ingress",
                 "cluster": "HipsterShopCluster"
-            },
-            "k8sServiceName": "",
-            "k8sServiceIP": "8.8.8.8/32",
-            "k8sServicePorts": [],
-            "ipRanges": [],
-            "portRanges": [
-                {
-                    "start": 65534,
-                    "end": 65535
-                }
-            ]
+            }
         }
     ],
     "clientList": [
@@ -33,7 +24,7 @@
             "wlid": "",
             "wildwlid": "",
             "attributes": {
-                "namespace": "dev",
+                "app": "adservice",
                 "cluster": "HipsterShopCluster"
             }
         }

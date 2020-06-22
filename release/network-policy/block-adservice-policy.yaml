@@ -1,0 +1,24 @@
+{
+    "name": "HipsterShop-Block-Adservice-Policy",
+    "attributes": null,
+    "policyType": "",
+    "permissions": "deny",
+    "enforcementAction": "block",
+    "serverList": [
+        {
+            "designatorType": "wlid",
+            "wlid": "wlid://cluster-HipsterShopCluster/namespace-prod/deployment-adservice",
+            "wildwlid": "",
+            "groupName": "",
+            "attributes": {},
+        }
+    ],
+    "clientList": [
+        {
+            "designatorType": "wlid",
+            "wlid": "wlid://cluster-HipsterShopCluster/namespace-prod/deployment-frontend",
+            "wildwlid": "",
+            "attributes": {}
+        }
+    ]
+}

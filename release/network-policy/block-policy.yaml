@@ -1,0 +1,26 @@
+{
+    "name": "HipsterShop-Block-Policy",
+    "policyType": "storage-block-policy",
+    "permissions": "deny",
+    "enforcementAction": "block",
+    "serverList": [
+        {
+            "designatorType": "attribute",
+              "attributes": {
+                  "storage": "redis",
+                  "namespace": "prod",
+                  "cluster": "HipsterShopCluster"
+              }
+        }
+    ],
+    "clientList": [
+        {
+            "designatorType": "attribute",
+            "attributes": {
+                "tair": "frontend",
+                "namespace": "prod",
+                "cluster": "HipsterShopCluster"
+            }
+        }
+    ]
+}
