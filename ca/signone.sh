@@ -20,10 +20,6 @@ if [ $DEPLOYMENT == "loadgenerator" ] ;then
   cacli sp delete -n signing-profile-$DEPLOYMENT
   cacli sp create -i "$tmpfile"
   rm "$tmpfile"
-  tmpfile=$(mktemp /tmp/sp.XXXXXX)
-  cacli wt get -wlid $wlid
-  cacli wt apply -i "$wlid"
-  rm "$tmpfile"
 fi
 wlid_prod="wlid://cluster-$CLUSTER/namespace-$NAMESPACE_PROD/deployment-$DEPLOYMENT"
 tmpfile=$(mktemp /tmp/wt.XXXXXX)
