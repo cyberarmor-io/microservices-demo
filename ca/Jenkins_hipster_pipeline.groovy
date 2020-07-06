@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label '${NODE_LABEL}'
+        label '${env.NODE_LABEL}'
     }
     stages {
         stage('git') {
