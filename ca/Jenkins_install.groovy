@@ -1,5 +1,10 @@
 pipeline {
-    agent { label '${NODE_LABEL}' }
+    agent {
+        label "${env.NODE_LABEL}"
+    }
+    environment {
+        DEMO_NUMBER = "${env.DEMO_NUMBER}"
+    }
     stages {
         stage('Login to CyberArmor') {
             steps {

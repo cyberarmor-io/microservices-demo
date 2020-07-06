@@ -1,6 +1,9 @@
 pipeline {
     agent {
-        label '${env.NODE_LABEL}'
+        label "${env.NODE_LABEL}"
+    }
+    environment {
+        DEMO_NUMBER = "${env.DEMO_NUMBER}"
     }
     stages {
         stage('git') {

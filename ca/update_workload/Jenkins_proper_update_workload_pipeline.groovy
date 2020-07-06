@@ -6,7 +6,9 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/ingress_version']], userRemoteConfigs: [[url:'https://github.com/cyberarmor-io/microservices-demo.git']]])
             }
         }
-
+        environment {
+                DEMO_NUMBER = "${env.DEMO_NUMBER}"
+        }
         stage('deploy in dev environment') {
             steps {
                 sh '''
