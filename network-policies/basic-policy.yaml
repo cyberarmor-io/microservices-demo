@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop-Basic-Policy",
+    "name": "HipsterShop-Basic-Policy${DEMO_NUMBER}",
     "attributes": null,
     "policyType": "",
     "permissions": "allow",
@@ -13,7 +13,7 @@
             "ports": [],
             "attributes": {
                 "namespace": "prod",
-                "cluster": "HipsterShopCluster"
+                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
             },
             "k8sServiceName": "",
             "k8sServiceIP": "",
@@ -51,7 +51,7 @@
             "wildwlid": "",
             "attributes": {
                 "namespace": "prod",
-                "cluster": "HipsterShopCluster"
+                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
             }
         }
     ]

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-CLUSTER=HipsterShopCluster
+CLUSTER=HipsterShopCluster$DEMO_NUMBER
 NAMESPACE=dev
 NAMESPACE_PROD=prod
 DEPLOYMENT="$1"

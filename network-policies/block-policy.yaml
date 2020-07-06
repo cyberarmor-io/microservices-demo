@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop-Block-Policy",
+    "name": "HipsterShop-Block-Policy${DEMO_NUMBER}",
     "policyType": "storage-block-policy",
     "permissions": "deny",
     "enforcementAction": "block",
@@ -14,7 +14,7 @@
               "attributes": {
                   "storage": "redis",
                   "namespace": "prod",
-                  "cluster": "HipsterShopCluster"
+                  "cluster": "HipsterShopCluster${DEMO_NUMBER}"
               }
         }
     ],
@@ -24,7 +24,7 @@
             "attributes": {
                 "tair": "frontend",
                 "namespace": "prod",
-                "cluster": "HipsterShopCluster"
+                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
             }
         }
     ]

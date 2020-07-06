@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop-Cross-Namespace-Deny-Policy",
+    "name": "HipsterShop-Cross-Namespace-Deny-Policy${DEMO_NUMBER}",
     "attributes": null,
     "policyType": "corss-namesapce-control",
     "permissions": "deny",
@@ -13,7 +13,7 @@
             "ports": [],
             "attributes": {
                 "namespace": "prod",
-                "cluster": "HipsterShopCluster"
+                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
             },
             "k8sServiceName": "",
             "k8sServiceIP": "8.8.8.8/32",
@@ -34,7 +34,7 @@
             "wildwlid": "",
             "attributes": {
                 "namespace": "dev",
-                "cluster": "HipsterShopCluster"
+                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
             }
         }
     ]

@@ -1,49 +1,37 @@
 pipeline {
-    agent { label 'HIPSTER1' }
+    agent { label '${NODE_LABEL}' }
     stages {
         stage('git') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/ingress_version']], userRemoteConfigs: [[url:'https://github.com/cyberarmor-io/microservices-demo.git']]])
             }
         }
-        
+
         stage('deploy in dev environment') {
             steps {
                 sh '''
-                kubectl create namespace dev || true
-                kubectl -n dev apply -f release/kubernetes-manifests.yaml
-                kubectl -n dev apply -f ingress_dev.yaml
-                '''
-            }
-        }
-        
-        stage('system test') {
-            steps {
-                sh '''
-                sleep 10
+                kubectl set image deployment/redis-cart -n prod redis=redis:alpine
+                kubectl -n dev apply -f release/kubernetes-manifests-edited.yaml
                 '''
             }
         }
 
-        stage('processing workload data') {
+        stage('system test') {
             steps {
                 sh '''
-                sleep 60
+                sleep 120
                 '''
             }
         }
-        
-        stage('signing workloads') {
+
+        stage('sign workload') {
             steps {
             sh '''
-            cd ca
-            ./signall.sh
-            cd ..
-            sleep 120
+            ./ca/update_workload/signone.sh
             '''
             }
         }
-        
+
         stage('promote') {
             steps {
                 sh '''
@@ -51,29 +39,24 @@ pipeline {
                 '''
             }
         }
-        
+
         stage('deploy in prod environment') {
             steps {
                 sh '''
-                kubectl create namespace prod || true
-                kubectl delete --all pods --namespace=prod
-                kubectl -n prod apply -f release/kubernetes-manifests.yaml
-                kubectl -n prod delete secret nginx-ssl || true
-                kubectl -n prod create secret generic nginx-ssl --from-file=tls.key=ca-nginx-tls.key.enc --from-file=tls.crt=ca-nginx-tls.crt.enc 
-                kubectl -n prod apply -f ingress.yaml
+                kubectl -n prod apply -f release/kubernetes-manifests-edited.yaml
                 '''
             }
         }
-        
+
         stage('liveliness test') {
             steps {
                 sh '''
-                sleep 30
+                sleep 120
                 kubectl -n prod delete pod $(kubectl -n prod get pods | grep frontend | awk '{print $1}')
                 sleep 5
                 '''
             }
         }
-        
+
     }
 }

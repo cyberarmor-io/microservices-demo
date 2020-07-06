@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop-Block-Adservice-Policy",
+    "name": "HipsterShop-Block-Adservice-Policy${DEMO_NUMBER}",
     "attributes": null,
     "policyType": "",
     "permissions": "deny",
@@ -7,7 +7,7 @@
     "serverList": [
         {
             "designatorType": "wlid",
-            "wlid": "wlid://cluster-HipsterShopCluster/namespace-prod/deployment-adservice",
+            "wlid": "wlid://cluster-HipsterShopCluster${DEMO_NUMBER}/namespace-prod/deployment-adservice",
             "wildwlid": "",
             "groupName": "",
             "ports": [],
@@ -25,7 +25,7 @@
     "clientList": [
         {
             "designatorType": "wlid",
-            "wlid": "wlid://cluster-HipsterShopCluster/namespace-prod/deployment-frontend",
+            "wlid": "wlid://cluster-HipsterShopCluster${DEMO_NUMBER}/namespace-prod/deployment-frontend",
             "wildwlid": "",
             "attributes": {}
         }

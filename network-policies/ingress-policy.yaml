@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop-A-Ingress-Policy",
+    "name": "HipsterShop-A-Ingress-Policy${DEMO_NUMBER}",
     "attributes": null,
     "policyType": "explicit",
     "permissions": "allow",
@@ -14,7 +14,7 @@
             "ports": [],
             "attributes": {
                 "app": "nginx-ingress",
-                "cluster": "HipsterShopCluster"
+                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
             },
             "k8sServiceName": "",
             "k8sServiceIP": "",
@@ -35,7 +35,7 @@
             "wildwlid": "",
             "attributes": {
                 "app": "adservice",
-                "cluster": "HipsterShopCluster"
+                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
             }
         }
     ]

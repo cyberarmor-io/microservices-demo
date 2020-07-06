@@ -1,5 +1,7 @@
 pipeline {
-    agent { label 'HIPSTER1' }
+    agent {
+        label '${NODE_LABEL}'
+    }
     stages {
         stage('git') {
             steps {
