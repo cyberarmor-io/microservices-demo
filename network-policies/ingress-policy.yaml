@@ -4,7 +4,7 @@
     "policyType": "explicit",
     "permissions": "allow",
     "enforcementAction": "block",
-    "permissiveMode": True,
+    "permissiveMode": true,
     "serverList": [
         {
             "designatorType": "attribute",
