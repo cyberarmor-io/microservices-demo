@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop-Block-Adservice-Policy${DEMO_NUMBER}",
+    "name": "HipsterShop${DEMO_NUMBER}-Block-Adservice-Policy",
     "attributes": null,
     "policyType": "",
     "permissions": "deny",

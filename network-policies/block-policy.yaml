@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop-Block-Policy${DEMO_NUMBER}",
+    "name": "HipsterShop${DEMO_NUMBER}-Block-Policy",
     "policyType": "storage-block-policy",
     "permissions": "deny",
     "enforcementAction": "block",

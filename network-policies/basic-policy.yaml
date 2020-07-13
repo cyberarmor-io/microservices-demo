@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop-Basic-Policy${DEMO_NUMBER}",
+    "name": "HipsterShop${DEMO_NUMBER}-Basic-Policy",
     "attributes": null,
     "policyType": "",
     "permissions": "allow",
