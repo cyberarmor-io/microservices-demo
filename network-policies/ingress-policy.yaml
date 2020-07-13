@@ -16,15 +16,18 @@
                     "ipRangeEnd": "255.255.255.255"
                 }
             ],
-            "portRanges": [
-                {
-                    "start": 30000,
-                    "end": 30001
-                }
-            ],
-            "ports": [],
+            "portRanges": [],
+            "ports": [30000],
             "hosts": [],
-            "isCertificateMandatory": false
+            "isCertificateMandatory": false,
+            "tlsCertificateProperties": {
+                "commonName": "",
+                "SANs": [],
+                "organizationName": "",
+                "issuerCN": "",
+                "issuerCertificateID": "",
+                "v3CustomeExtensions": {}
+            }
         }
     ]
 }
