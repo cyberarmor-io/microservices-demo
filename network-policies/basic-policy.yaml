@@ -11,30 +11,8 @@
                 "namespace": "prod",
                 "cluster": "HipsterShopCluster${DEMO_NUMBER}"
             },
-            "ipRanges": [
-                {
-                    "ipRangeStart": "10.0.0.0",
-                    "ipRangeEnd": "10.255.255.255"
-                },
-                {
-                    "ipRangeStart": "172.16.0.0",
-                    "ipRangeEnd": "172.31.255.255"
-                },
-                {
-                    "ipRangeStart": "192.168.0.0",
-                    "ipRangeEnd": "192.168.255.255"
-                }
-            ],
-            "portRanges": [
-                {
-                    "start": 80,
-                    "end": 29999
-                },
-                {
-                    "start": 30001,
-                    "end": 65535
-                }
-            ]
+            "ipRanges": [],
+            "portRanges": []
         }
     ],
     "clientList": [

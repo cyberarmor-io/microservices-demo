@@ -1,42 +1,31 @@
 {
     "name": "HipsterShop-A-Ingress-Policy${DEMO_NUMBER}",
-    "attributes": null,
-    "policyType": "explicit",
+    "policyType": "ingress",
     "permissions": "allow",
-    "enforcementAction": "block",
-    "permissiveMode": true,
-    "serverList": [
+    "designators": [
         {
-            "designatorType": "attribute",
-            "wlid": "",
-            "wildwlid": "",
-            "groupName": "",
-            "ports": [],
-            "attributes": {
-                "app": "nginx-ingress",
-                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
-            },
-            "k8sServiceName": "",
-            "k8sServiceIP": "",
-            "k8sServicePorts": [],
-            "ipRanges": [],
-            "portRanges": [
-                {
-                    "start": 40000,
-                    "end": 40001
-                }
-            ]
+            "designatorType": "wlid",
+            "wlid": "wlid://cluster-HipsterShopCluster${DEMO_NUMBER}/namespace-prod/deployment-nginx-ingress",
         }
     ],
-    "clientList": [
+    "peers": [
         {
-            "designatorType": "attribute",
-            "wlid": "",
-            "wildwlid": "",
-            "attributes": {
-                "app": "adservice",
-                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
-            }
+            "ipRanges": [
+                {
+                    "ipRangeStart": "0.0.0.0",
+                    "ipRangeEnd": "255.255.255.255"
+                }
+            ],
+            "portRanges": [
+                {
+                    "start": 30000,
+                    "end": 30001
+                }
+            ],
+            "ports": [],
+            "hosts": [],
+            "isCertificateMandatory": false
         }
     ]
 }
+
