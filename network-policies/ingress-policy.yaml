@@ -5,7 +5,7 @@
     "designators": [
         {
             "designatorType": "wlid",
-            "wlid": "wlid://cluster-HipsterShopCluster${DEMO_NUMBER}/namespace-prod/deployment-nginx-ingress",
+            "wlid": "wlid://cluster-HipsterShopCluster${DEMO_NUMBER}/namespace-prod/deployment-nginx-ingress"
         }
     ],
     "peers": [
