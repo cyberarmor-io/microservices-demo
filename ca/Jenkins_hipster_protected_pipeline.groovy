@@ -17,7 +17,6 @@ pipeline {
                 sh '''
                 kubectl create namespace dev || true
                 kubectl -n dev apply -f release/kubernetes-manifests.yaml
-                kubectl -n dev apply -f ingress_dev.yaml
                 '''
             }
         }
@@ -33,7 +32,7 @@ pipeline {
         stage('processing workload data') {
             steps {
                 sh '''
-                sleep 60
+                sleep 10
                 '''
             }
         }
@@ -61,11 +60,8 @@ pipeline {
             steps {
                 sh '''
                 kubectl create namespace prod || true
+                kubectl -n dev apply -f release/kubernetes-manifests.yaml
                 kubectl delete --all pods --namespace=prod
-                kubectl -n prod apply -f release/kubernetes-manifests.yaml
-                kubectl -n prod delete secret nginx-ssl || true
-                kubectl -n prod create secret generic nginx-ssl --from-file=tls.key=ca-nginx-tls.key.enc --from-file=tls.crt=ca-nginx-tls.crt.enc 
-                kubectl -n prod apply -f ingress.yaml
                 '''
             }
         }
@@ -73,12 +69,11 @@ pipeline {
         stage('liveliness test') {
             steps {
                 sh '''
-                sleep 30
-                kubectl -n prod delete pod $(kubectl -n prod get pods | grep frontend | awk '{print $1}')
-                sleep 5
+                sleep 120
+                kubectl -n prod delete pod $(kubectl -n dev get pods | grep recommendationservice | awk '{print $1}')
+                kubectl -n prod delete pod $(kubectl -n prod get pods | grep recommendationservice | awk '{print $1}')
                 '''
             }
         }
-        
     }
 }
