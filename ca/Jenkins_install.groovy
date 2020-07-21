@@ -46,6 +46,7 @@ pipeline {
         stage('Attaching CyberArmor to Namespaces') {
             steps {
                 sh '''
+                sleep 120
                 kubectl create namespace dev || true
                 kubectl label namespace dev injectCyberArmor=add
                 sleep 80
