@@ -46,12 +46,20 @@ pipeline {
         stage('Attaching CyberArmor to Namespaces') {
             steps {
                 sh '''
-                sleep 120
                 kubectl create namespace dev || true
                 kubectl label namespace dev injectCyberArmor=add
                 sleep 80
                 kubectl create namespace prod || true
                 kubectl label namespace prod injectCyberArmor=add
+                '''
+            }
+        }
+        stage('liveliness test') {
+            steps {
+                sh '''
+                sleep 120
+                kubectl -n prod delete pod $(kubectl -n dev get pods | grep recommendationservice | awk '{print $1}')
+                kubectl -n prod delete pod $(kubectl -n prod get pods | grep recommendationservice | awk '{print $1}')
                 '''
             }
         }
