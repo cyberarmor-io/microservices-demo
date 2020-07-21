@@ -58,8 +58,8 @@ pipeline {
             steps {
                 sh '''
                 sleep 120
-                kubectl -n prod delete pod $(kubectl -n dev get pods | grep recommendationservice | awk '{print $1}')
-                kubectl -n prod delete pod $(kubectl -n prod get pods | grep recommendationservice | awk '{print $1}')
+                kubectl -n prod delete pod $(kubectl -n dev get pods | grep recommendationservice | awk '{print $1}') || true
+                kubectl -n prod delete pod $(kubectl -n prod get pods | grep recommendationservice | awk '{print $1}') || true
                 '''
             }
         }
