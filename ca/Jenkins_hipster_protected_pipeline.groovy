@@ -17,6 +17,7 @@ pipeline {
                 sh '''
                 kubectl create namespace dev || true
                 kubectl -n dev apply -f release/kubernetes-manifests.yaml
+                kubectl -n dev apply -f ingress_dev.yaml
                 '''
             }
         }
@@ -60,8 +61,11 @@ pipeline {
             steps {
                 sh '''
                 kubectl create namespace prod || true
-                kubectl -n dev apply -f release/kubernetes-manifests.yaml
+                kubectl -n prod apply -f release/kubernetes-manifests.yaml
                 kubectl delete --all pods --namespace=prod
+                kubectl -n prod delete secret nginx-ssl || true
+                kubectl -n prod create secret generic nginx-ssl --from-file=tls.key=ca-nginx-tls.key.enc --from-file=tls.crt=ca-nginx-tls.crt.enc
+                kubectl -n prod apply -f ingress.yaml
                 '''
             }
         }
