@@ -1,0 +1,28 @@
+{
+  "name": "HipsterShop${DEMO_NUMBER}-Protect-DataBase-Policy",
+  "policyType": "",
+  "permissions": "allow",
+  "enforcementAction": "block",
+  "serverList": [
+    {
+      "designatorType": "attribute",
+      "ports": [6379],
+      "attributes": {
+        "cluster": "HipsterShopCluster${DEMO_NUMBER}",
+        "namespace": "prod",
+          "storage": "redis"
+      }
+    }
+  ],
+  "clientList": [
+    {
+      "designatorType": "attribute",
+      "attributes": {
+        "cluster": "HipsterShopCluster${DEMO_NUMBER}",
+        "namespace": "prod",
+        "storage": "redis",
+        "service": "checkout"
+      }
+    }
+  ]
+}
