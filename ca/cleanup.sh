@@ -10,4 +10,4 @@ echo "$np_result"
 inp_result=`cacli inp list  |grep HipsterShop"$DEMO_NUMBER" | sed s/\,//g | xargs -l1 cacli inp delete -n ` || true
 echo "$inp_result"
 cacli wt list | python3 -c "import json,sys;d=json.load(sys.stdin);print('\n'.join(filter(lambda s: s.count('cluster-HipsterShopCluster$DEMO_NUMBER'),d)))" | xargs -L1 cacli cleanup -wlid "$@" || true
-
+cacli cluster unregister -n HipsterShop"$DEMO_NUMBER"
