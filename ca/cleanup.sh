@@ -1,5 +1,6 @@
 #!/bin/bash
 set -x
+cacli login -e ${CA_ENVIRONMENT} -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
 
 kubectl delete namespace dev prod cyberarmor-system || true
 #cacli np delete -n HipsterShop-Basic-Policy$DEMO_NUMBER || true
