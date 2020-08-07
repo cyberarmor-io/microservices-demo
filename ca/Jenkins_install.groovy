@@ -25,8 +25,7 @@ pipeline {
                 cacli wt list | python3 -c "import json,sys;d=json.load(sys.stdin);print('\n'.join(filter(lambda s: s.count('cluster-HipsterShopCluster${DEMO_NUMBER}'),d)))" | xargs -L1 cacli cleanup -wlid $@  || true
                 '''
                 sh '''
-                cacli cluster register -n HipsterShopCluster${DEMO_NUMBER} -o install.sh
-                ./install.sh -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
+                cacli cluster register -n HipsterShopCluster${DEMO_NUMBER} --run -p ${CA_PASSWORD}
                 '''
             }
         }
@@ -47,6 +46,7 @@ pipeline {
         stage('Attaching CyberArmor to Namespaces') {
             steps {
                 sh '''
+                echo "wait for webhook to run"; sleep 10
                 kubectl create namespace dev || true
                 kubectl label namespace dev injectCyberArmor=add
                 kubectl create namespace prod || true
@@ -57,7 +57,7 @@ pipeline {
         stage('liveliness test') {
             steps {
                 sh '''
-                sleep 160
+                echo "wait for all workloads to run attached"; sleep 160
                 kubectl -n prod delete pod $(kubectl -n prod get pods | grep cartservice | awk '{print $1}')  || true
                 kubectl -n prod delete pod $(kubectl -n dev get pods | grep recommendationservice | awk '{print $1}') || true
                 kubectl -n prod delete pod $(kubectl -n prod get pods | grep recommendationservice | awk '{print $1}') || true
