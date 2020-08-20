@@ -59,7 +59,7 @@ pipeline {
                 sh '''
                 echo "wait for all workloads to run attached"; sleep 160
                 cacli ec create -wlid "wlid://cluster-HipsterShopCluster${DEMO_NUMBER}/namespace-prod/deployment-productcatalogservice" -c "server" -p ".*\\.json" -kid "99d368694eb64f4d9eef46a60c18af82" || true
-                kubectl patch  deployment -n prod productcatalogservice -p '{"spec": {"template": {"spec": { "volumes": [{"name": "catalog", "hostPath": {"path": "'${PWD}'/products.json", "type": "File"}}],"containers": [{"name": "server", "volumeMounts": [{"name": "catalog", "mountPath": "/productcatalogservice/products.json", "readOnly": false}]}]}}}}'
+                kubectl -n prod patch  deployment  productcatalogservice -p '{"spec": {"template": {"spec": { "volumes": [{"name": "catalog", "hostPath": {"path": "'"${PWD}"'/products.json", "type": "File"}}],"containers": [{"name": "server", "volumeMounts": [{"name": "catalog", "mountPath": "/productcatalogservice/products.json", "readOnly": false}]}]}}}}' || true
                 kubectl -n prod delete pod $(kubectl -n prod get pods | grep cartservice | awk '{print $1}')  || true
                 kubectl -n prod delete pod $(kubectl -n dev get pods | grep recommendationservice | awk '{print $1}') || true
                 kubectl -n prod delete pod $(kubectl -n prod get pods | grep recommendationservice | awk '{print $1}') || true
