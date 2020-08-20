@@ -1,3 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+  labels:
+    app: client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        - name: client
+          image: alpine:3.9.4
+          command: ["/bin/sh"]
+          args: ["-c", "while true sleep 10; do wget --no-cache --no-check-certificate https://nginx-ingress:8080 -O /dev/null; done"]
+---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -5,9 +29,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 8080
-    targetPort: 30000
-    nodePort: 30001
+    - port: 8080
+      targetPort: 30000
+      nodePort: 30001
   selector:
     app: nginx-ingress
 ---
@@ -17,21 +41,21 @@ metadata:
   name: nginx-conf
 data:
   nginx.conf: |
-        worker_rlimit_nofile 8192;
-        events {
-          worker_connections  4096;
-        }
-        http {
-            server {
-                listen      30000;
-                listen [::]:30000;
-                location / {
-                    proxy_set_header Host $host;
-                    proxy_set_header X-Real-IP $remote_addr;
-                    proxy_pass http://frontend:80;
-                }
+    worker_rlimit_nofile 8192;
+    events {
+      worker_connections  4096;
+    }
+    http {
+        server {
+            listen      30000;
+            listen [::]:30000;
+            location / {
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_pass http://frontend:80;
             }
         }
+    }
 
 ---
 apiVersion: apps/v1
@@ -49,18 +73,18 @@ spec:
         app: nginx-ingress
     spec:
       containers:
-      - name: nginx-ingress
-        image: nginx:1.14.2
-        ports:
-        - containerPort: 30000
-        volumeMounts:
-        - mountPath: /etc/nginx # mount nginx-conf volumn to /etc/nginx
-          readOnly: true
-          name: nginx-conf
+        - name: nginx-ingress
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 30000
+          volumeMounts:
+            - mountPath: /etc/nginx # mount nginx-conf volumn to /etc/nginx
+              readOnly: true
+              name: nginx-conf
       volumes:
-      - name: nginx-conf
-        configMap:
-          name: nginx-conf # place ConfigMap `nginx-conf` on /etc/nginx
-          items:
-            - key: nginx.conf
-              path: nginx.conf
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf # place ConfigMap `nginx-conf` on /etc/nginx
+            items:
+              - key: nginx.conf
+                path: nginx.conf
