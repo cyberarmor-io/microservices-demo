@@ -22,7 +22,7 @@ spec:
             - name: SLEEP_DURATION
               value: "0.05"
             - name: DEMO_TARGETS
-              value: "https://demoservice-server:8089"
+              value: "https://nginx-ingress:8080"
       imagePullSecrets:
         - name: caregcred
 ---
