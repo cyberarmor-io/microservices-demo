@@ -17,9 +17,14 @@ spec:
     spec:
       containers:
         - name: client
-          image: alpine:3.9.4
-          command: ["/bin/sh"]
-          args: ["-c", "while true sleep 10; do wget --no-cache http://nginx-ingress:8080 -O /dev/null; done"]
+          image: dreg.eust0.cyberarmorsoft.com:443/demoservice:v26
+          env:
+            - name: SLEEP_DURATION
+              value: "0.05"
+            - name: DEMO_TARGETS
+              value: "http://demoservice-server:8089"
+      imagePullSecrets:
+        - name: caregcred
 ---
 
 apiVersion: v1

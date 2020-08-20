@@ -16,6 +16,7 @@ pipeline {
             steps {
                 sh '''
                 kubectl create namespace dev || true
+                kubectl -n dev create secret docker-registry caregcred --docker-server=dreg.eust0.cyberarmorsoft.com:443 --docker-username=${DOCKER_USER} --docker-password=${DOCKER_PASSWORD} --docker-email=bhirschb@cyberarmor.io || truekubectl create secret docker-registry my-secret --docker-server=dreg.eust0.cyberarmorsoft.com:443 --docker-username=${DOCKER_USER} --docker-password=${DOCKER_PASSWORD} --docker-email=bhirschb@cyberarmor.io || true
                 kubectl -n dev apply -f release/kubernetes-manifests.yaml
                 kubectl -n dev apply -f ingress_dev.yaml
                 '''
@@ -61,6 +62,7 @@ pipeline {
             steps {
                 sh '''
                 kubectl create namespace prod || true
+                kubectl -n prod create secret docker-registry caregcred --docker-server=dreg.eust0.cyberarmorsoft.com:443 --docker-username=${DOCKER_USER} --docker-password=${DOCKER_PASSWORD} --docker-email=bhirschb@cyberarmor.io || truekubectl create secret docker-registry my-secret --docker-server=dreg.eust0.cyberarmorsoft.com:443 --docker-username=${DOCKER_USER} --docker-password=${DOCKER_PASSWORD} --docker-email=bhirschb@cyberarmor.io || true
                 kubectl -n prod apply -f release/kubernetes-manifests.yaml
                 kubectl delete --all pods --namespace=prod
                 kubectl -n prod delete secret nginx-ssl || true
