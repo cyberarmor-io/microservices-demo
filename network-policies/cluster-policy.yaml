@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop${DEMO_NUMBER}-Cross-Namespace-Deny-Policy",
+    "name": "HipsterShopCluster${DEMO_NUMBER}-Cross-Namespace-Deny-Policy",
     "attributes": null,
     "policyType": "corss-namesapce-control",
     "permissions": "deny",

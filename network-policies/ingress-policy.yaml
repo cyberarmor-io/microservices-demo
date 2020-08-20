@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShop${DEMO_NUMBER}-A-Ingress-Policy",
+    "name": "HipsterShopCluster${DEMO_NUMBER}-A-Ingress-Policy",
     "policyType": "ingress",
     "permissions": "allow",
     "designators": [

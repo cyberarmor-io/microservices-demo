@@ -1,5 +1,5 @@
 {
-  "name": "HipsterShop${DEMO_NUMBER}-Protect-DataBase-Policy",
+  "name": "HipsterShopCluster${DEMO_NUMBER}-Protect-DataBase-Policy",
   "policyType": "",
   "permissions": "allow",
   "enforcementAction": "block",
