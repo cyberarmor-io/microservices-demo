@@ -19,7 +19,7 @@ spec:
         - name: client
           image: alpine:3.9.4
           command: ["/bin/sh"]
-          args: ["-c", "while true sleep 10; do wget --no-cache --no-check-certificate https://nginx-ingress:8080 -O /dev/null; done"]
+          args: ["-c", "while true sleep 10; do wget --no-cache http://nginx-ingress:8080 -O /dev/null; done"]
 ---
 
 apiVersion: v1
