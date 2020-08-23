@@ -20,9 +20,9 @@ spec:
           image: dreg.eust0.cyberarmorsoft.com:443/demoservice:v26
           env:
             - name: SLEEP_DURATION
-              value: "0.05"
+              value: "2"
             - name: DEMO_TARGETS
-              value: "http://nginx-ingress:8080"
+              value: "http://frontend:80"
       imagePullSecrets:
         - name: caregcred
 ---
