@@ -1,7 +1,7 @@
 {
     "name": "HipsterShopCluster${DEMO_NUMBER}-Block-Frontend-Policy",
     "attributes": null,
-    "policyType": "",
+    "policyType": "explicit",
     "permissions": "deny",
     "enforcementAction": "block",
     "serverList": [

@@ -1,6 +1,6 @@
 {
     "name": "HipsterShopCluster${DEMO_NUMBER}-Block-Policy",
-    "policyType": "storage-block-policy",
+    "policyType": "explicit",
     "permissions": "deny",
     "enforcementAction": "block",
     "serverList": [

@@ -81,7 +81,7 @@ spec:
     spec:
       containers:
         - name: nginx-ingress
-          image: nginx:1.14.2
+          image: nginx:1.18.0
           securityContext:
             capabilities:
               add: ["SYS_PTRACE"]

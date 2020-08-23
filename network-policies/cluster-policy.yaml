@@ -1,7 +1,7 @@
 {
     "name": "HipsterShopCluster${DEMO_NUMBER}-Cross-Namespace-Deny-Policy",
     "attributes": null,
-    "policyType": "corss-namesapce-control",
+    "policyType": "explicit",
     "permissions": "deny",
     "enforcementAction": "block",
     "serverList": [

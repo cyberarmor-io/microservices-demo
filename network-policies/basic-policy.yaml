@@ -1,7 +1,6 @@
 {
     "name": "HipsterShopCluster${DEMO_NUMBER}-Basic-Policy",
-    "attributes": null,
-    "policyType": "",
+    "policyType": "basic",
     "permissions": "allow",
     "enforcementAction": "block",
     "serverList": [
@@ -12,7 +11,12 @@
                 "cluster": "HipsterShopCluster${DEMO_NUMBER}"
             },
             "ipRanges": [],
-            "portRanges": []
+            "portRanges": [
+                {
+                  "start": 80,
+                  "end": 65535
+                }
+            ]
         }
     ],
     "clientList": [
