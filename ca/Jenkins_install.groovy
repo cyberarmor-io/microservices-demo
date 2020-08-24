@@ -35,7 +35,7 @@ pipeline {
                 sh 'cat network-policies/ingress-policy.yaml | sed \'s/${DEMO_NUMBER}/\'${DEMO_NUMBER}\'/g\' | cacli inp create -i - || true'
                 sh 'cat network-policies/basic-policy.yaml | sed \'s/${DEMO_NUMBER}/\'${DEMO_NUMBER}\'/g\' | cacli np create -i - || true'
                 sh 'cat network-policies/cluster-policy.yaml | sed \'s/${DEMO_NUMBER}/\'${DEMO_NUMBER}\'/g\' | cacli np create -i - || true'
-                sh 'cat network-policies/protect-database-policy.yaml | sed \'s/${DEMO_NUMBER}/\'${DEMO_NUMBER}\'/g\' | cacli np create -i - || true'
+//                 sh 'cat network-policies/protect-database-policy.yaml | sed \'s/${DEMO_NUMBER}/\'${DEMO_NUMBER}\'/g\' | cacli np create -i - || true'
                 sh 'kubectl -n prod delete secret nginx-ssl || true'
                 sh 'kubectl -n prod create secret generic nginx-ssl --from-file=tls.key=ca-nginx-tls.key.enc --from-file=tls.crt=ca-nginx-tls.crt.enc || true'
                 sh 'cacli ec create -wlid wlid://cluster-HipsterShopCluster${DEMO_NUMBER}/namespace-prod/deployment-nginx-ingress -c nginx-ingress -kid 99d368694eb64f4d9eef46a60c18af82 -p /etc/nginx/ssl || true'
