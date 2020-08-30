@@ -1,3 +1,5 @@
+def CACLI_URL=get_cacli_url()
+
 pipeline {
     agent {
         label "${env.NODE_LABEL}"
@@ -8,9 +10,9 @@ pipeline {
     stages {
         stage('Login to CyberArmor') {
             steps {
-                def url = get_cacli_url()
+
                 sh '''
-                sudo pip3 install -U cacli --index-url ''' + "${url}" + '''
+                sudo pip3 install -U cacli --index-url ''' + "${CACLI_URL}" + '''
                 cacli login -e ${CA_ENVIRONMENT} -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
                 '''
             }
