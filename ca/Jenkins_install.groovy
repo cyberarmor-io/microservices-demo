@@ -8,8 +8,9 @@ pipeline {
     stages {
         stage('Login to CyberArmor') {
             steps {
+                def url = get_cacli_url()
                 sh '''
-                sudo pip3 install -U cacli --index-url https://carepo.system.cyberarmorsoft.com/repository/cyberarmor-pypi-dev.group/simple
+                sudo pip3 install -U cacli --index-url ''' + "${url}" + '''
                 cacli login -e ${CA_ENVIRONMENT} -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
                 '''
             }
@@ -68,4 +69,12 @@ pipeline {
             }
         }
     }
+}
+
+
+def get_cacli_url(){
+    if ("${CA_ENVIRONMENT}" == dev || "${CA_ENVIRONMENT}" == development ) {
+        return "https://carepo.system.cyberarmorsoft.com/repository/cyberarmor-pypi-dev.group/simple"
+    }
+    return "https://carepo.system.cyberarmorsoft.com/repository/cyberarmor-pypi.release"
 }
