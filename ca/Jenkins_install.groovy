@@ -75,7 +75,7 @@ pipeline {
 
 
 def get_cacli_url(){
-    if ("${CA_ENVIRONMENT}" == dev || "${CA_ENVIRONMENT}" == development ) {
+    if ("${env.CA_ENVIRONMENT}" == "dev" || "${env.CA_ENVIRONMENT}" == "development" ) {
         return "https://carepo.system.cyberarmorsoft.com/repository/cyberarmor-pypi-dev.group/simple"
     }
     return "https://carepo.system.cyberarmorsoft.com/repository/cyberarmor-pypi.release"
