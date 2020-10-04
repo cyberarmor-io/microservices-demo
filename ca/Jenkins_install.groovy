@@ -47,7 +47,7 @@ pipeline {
         stage('Attaching CyberArmor to Namespaces') {
             steps {
                 sh '''
-                echo "wait for webhook to run"; sleep 10
+                echo "wait for webhook to run"; sleep 20
                 kubectl create namespace dev || true
                 kubectl label namespace dev injectCyberArmor=add
                 kubectl create namespace prod || true

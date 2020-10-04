@@ -1,28 +1,46 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: client
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: caregcred
+  namespace: client
+data:
+  .dockerconfigjson: >-
+    eyJhdXRocyI6eyJkcmVnLmV1c3QwLmN5YmVyYXJtb3Jzb2Z0LmNvbTo0NDMiOnsidXNlcm5hbWUiOiJjYXVzZXIiLCJwYXNzd29yZCI6ImpZMzVzbzlnIiwiZW1haWwiOiJiaGlyc2NoYkBjeWJlcmFybW9yLmlvIiwiYXV0aCI6IlkyRjFjMlZ5T21wWk16VnpiemxuIn19fQ==
+type: kubernetes.io/dockerconfigjson
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client
+  name: elastic-reader
+  namespace: client
   labels:
-    app: client
+    app: elastic-reader
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: client
+      app: elastic-reader
   template:
     metadata:
       labels:
-        app: client
+        app: elastic-reader
     spec:
       containers:
-        - name: client
+        - name: elastic-reader
           image: dreg.eust0.cyberarmorsoft.com:443/demoservice:v26
           env:
             - name: SLEEP_DURATION
               value: "2"
             - name: DEMO_TARGETS
-              value: "http://frontend:80"
+              value: "http://elasticsearch-master.logging:9200"
       imagePullSecrets:
         - name: caregcred
 ---
