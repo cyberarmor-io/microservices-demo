@@ -12,6 +12,7 @@ pipeline {
             steps {
 
                 sh '''
+                sudo pip3 uninstall cacli
                 sudo pip3 install -U cacli --index-url ''' + "${CACLI_URL}" + '''
                 cacli login -e ${CA_ENVIRONMENT} -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
                 '''
@@ -78,5 +79,5 @@ def get_cacli_url(){
     if ("${env.CA_ENVIRONMENT}" == "dev" || "${env.CA_ENVIRONMENT}" == "development" ) {
         return "https://carepo.system.cyberarmorsoft.com/repository/cyberarmor-pypi-dev.group/simple"
     }
-    return "https://carepo.system.cyberarmorsoft.com/repository/cyberarmor-pypi.release"
+    return "https://carepo.system.cyberarmorsoft.com/repository/cyberarmor-pypi.release/simple"
 }
