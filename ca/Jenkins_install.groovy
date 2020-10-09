@@ -12,7 +12,7 @@ pipeline {
             steps {
 
                 sh '''
-                sudo pip3 uninstall cacli
+                sudo pip3 uninstall -y cacli
                 sudo pip3 install -U cacli --index-url ''' + "${CACLI_URL}" + '''
                 cacli login -e ${CA_ENVIRONMENT} -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
                 '''
