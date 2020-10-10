@@ -12,8 +12,10 @@ pipeline {
             steps {
 
                 sh '''
-                sudo pip3 uninstall -y cacli
-                sudo pip3 install -U cacli --index-url ''' + "${CACLI_URL}" + '''
+                sudo pip3 uninstall -y cacli || true
+                pip3 uninstall -y cacli || true
+                pip3 install --user --upgrade --force-reinstall cacli --index-url ''' + "${CACLI_URL}" + '''
+                cacli --version
                 cacli login -e ${CA_ENVIRONMENT} -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
                 '''
             }
@@ -81,3 +83,4 @@ def get_cacli_url(){
     }
     return "https://carepo.system.cyberarmorsoft.com/repository/cyberarmor-pypi.release/simple"
 }
+
