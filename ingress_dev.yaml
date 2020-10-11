@@ -79,7 +79,7 @@ spec:
     spec:
       containers:
         - name: nginx-ingress
-          image: nginx:1.14.2
+          image: nginx:1.18.0
           ports:
             - containerPort: 30000
           volumeMounts:
