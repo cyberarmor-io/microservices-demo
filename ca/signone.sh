@@ -25,7 +25,7 @@ fi
 # update prod sp
 wlid_prod="wlid://cluster-$CLUSTER/namespace-$NAMESPACE_PROD/deployment-$DEPLOYMENT"
 cacli wt update -wlid $wlid_prod --signing-profile $SP_NAME
-cacli sign -wlid $wlid_prod
+cacli wt sign -wlid $wlid_prod
 
 #pids[${DEPLOYMENT}]=$!
 echo "Signed $DEPLOYMENT, signing profile name: $SP_NAME"
