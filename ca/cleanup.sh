@@ -8,7 +8,7 @@ namespaces=("prod" "dev" "cyberarmor-system")
 
 while [ $i -lt 18 ] # wait up to three minutes for all namespace to stop running
 do
-  for (( i=0; i<${#namespaces[@]}; i++ )); do
+  for (( ns=0; ns<${#namespaces[@]}; ns++ )); do
     pods=$(kubectl -n ${namespaces[$ns]} get pods 2>&1)
     if [ "$pods" = "No resources found." ]; then
       echo "namespaces ${namespaces[$ns]} not running"
