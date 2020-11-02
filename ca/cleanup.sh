@@ -8,19 +8,19 @@ namespaces=("prod" "dev" "cyberarmor-system")
 
 while [ $i -lt 18 ] # wait up to three minutes for all namespace to stop running
 do
-  for (( i=0; i<${#namespaces[@]}; i++ )); do
+  i=$[$i+1]
+  for (( ns=0; ns<${#namespaces[@]}; ns++ )); do
     pods=$(kubectl -n ${namespaces[$ns]} get pods 2>&1)
     if [ "$pods" = "No resources found." ]; then
       echo "namespaces ${namespaces[$ns]} not running"
       namespaces=( "${namespaces[@]:0:$ns}" "${namespaces[@]:$((ns + 1))}" ) # remove namespace from list
     fi
     if [ ${#namespaces[@]} -eq 0 ]; then
-      i=18
+      i=19
       break
     fi
   done
   sleep 10
-  i=$[$i+1]
 done
 
 echo "all namespace are not running, unregistering cluster"
