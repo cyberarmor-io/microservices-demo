@@ -9,12 +9,6 @@ SP_NAME=signing-profile-$DEMO_NUMBER-$DEPLOYMENT
 
 # generate sp in dev
 wlid="wlid://cluster-$CLUSTER/namespace-$NAMESPACE/deployment-$DEPLOYMENT"
-wlid_prod="wlid://cluster-$CLUSTER/namespace-$NAMESPACE_PROD/deployment-$DEPLOYMENT"
-
-# Temp!
-cacli seal -wlid $wlid_prod
-exit 0
-
 cacli sp delete -n $SP_NAME &> /dev/null
 cacli sp generate -wlid $wlid -spn $SP_NAME &> log.txt ||  (echo Failed to generate for $DEPLOYMENT && cat log.txt)
 
@@ -29,8 +23,9 @@ if [ $DEPLOYMENT == "loadgenerator" ] ;then
 fi
 
 # update prod sp
+wlid_prod="wlid://cluster-$CLUSTER/namespace-$NAMESPACE_PROD/deployment-$DEPLOYMENT"
 cacli wt update -wlid $wlid_prod --signing-profile $SP_NAME
-cacli sign -wlid $wlid_prod
+cacli wt sign -wlid $wlid_prod
 
 #pids[${DEPLOYMENT}]=$!
 echo "Signed $DEPLOYMENT, signing profile name: $SP_NAME"
