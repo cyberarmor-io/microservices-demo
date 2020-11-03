@@ -28,4 +28,4 @@ np_result=$(cacli np list | grep HipsterShopCluster"$DEMO_NUMBER" | sed s/\,//g 
 echo "$np_result"
 inp_result=$(cacli inp list | grep HipsterShopCluster"$DEMO_NUMBER" | sed s/\,//g | xargs -l1 cacli inp delete -n) || true
 echo "$inp_result"
-cacli cluster unregister -n HipsterShopCluster"$DEMO_NUMBER"
+cacli cluster unregister -n HipsterShopCluster"$DEMO_NUMBER" || true
