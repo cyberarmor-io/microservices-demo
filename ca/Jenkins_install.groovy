@@ -33,6 +33,21 @@ pipeline {
                 sh '''
                 cacli cluster register -n HipsterShopCluster${DEMO_NUMBER} --run -p ${CA_PASSWORD}
                 '''
+                sh'''
+                #!/bin/bash
+                while true; do
+                    i=$(($i + 1))
+                    status=$(kubectl get pod -n cyberarmor-system | grep webhook |  awk '{print $3}' )
+                    if [ ! -z ${status} ] && [ ${status} = "Running" ]; then
+                        break
+                    fi
+                    if [ $i -eq 18 ]; then
+                        echo "webhook is not running after 3 minutes"
+                        exit 1
+                    fi
+                sleep 10
+                done
+                '''
             }
         }
 
