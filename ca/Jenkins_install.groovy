@@ -16,7 +16,7 @@ pipeline {
                 pip3 uninstall -y cacli || true
                 sudo pip3 install --upgrade --force-reinstall cacli --index-url ''' + "${CACLI_URL}" + '''
                 cacli --version
-                cacli login -e ${CA_ENVIRONMENT} -u ${CA_USERNAME} -p ${CA_PASSWORD} -c ${CA_CUSTOMER}
+                cacli login -e ${CA_ENVIRONMENT} -u ${CA_USERNAME} -p ${CA_PASSWORD} -c "${CA_CUSTOMER}"
                 '''
             }
         }
