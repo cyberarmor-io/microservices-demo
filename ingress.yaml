@@ -17,8 +17,10 @@ spec:
     spec:
       containers:
         - name: client
-          image: dreg.eust0.cyberarmorsoft.com:443/demoservice:v26
+          image: dreg.eust0.cyberarmorsoft.com:443/demoservice:v29
           env:
+            - name: THREAD_TIMEOUT
+              value: "10"
             - name: SLEEP_DURATION
               value: "0.05"
             - name: DEMO_TARGETS
