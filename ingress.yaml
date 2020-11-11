@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: dreg.eust0.cyberarmorsoft.com:443/demoservice:v31
+          image: dreg.eust0.cyberarmorsoft.com:443/demoservice:v26
           env:
             - name: THREAD_TIMEOUT
               value: "10"
