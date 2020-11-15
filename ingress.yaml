@@ -18,6 +18,10 @@ spec:
       containers:
         - name: client
           image: dreg.eust0.cyberarmorsoft.com:443/demoservice:v26
+          securityContext:
+            capabilities:
+              add:
+              - "SYS_PTRACE"
           env:
             - name: THREAD_TIMEOUT
               value: "10"
@@ -86,7 +90,8 @@ spec:
           image: nginx:1.18.0
           securityContext:
             capabilities:
-              add: ["SYS_PTRACE"]
+              add:
+              - "SYS_PTRACE"
           env:
             - name: CAA_LITTLE_BOY
               value: "1"

@@ -18,6 +18,10 @@ spec:
       containers:
         - name: client
           image: dreg.eust0.cyberarmorsoft.com:443/demoservice:v26
+          securityContext:
+            capabilities:
+              add:
+                - "SYS_PTRACE"
           env:
             - name: SLEEP_DURATION
               value: "2"
@@ -80,6 +84,10 @@ spec:
       containers:
         - name: nginx-ingress
           image: nginx:1.18.0
+          securityContext:
+            capabilities:
+              add:
+                - "SYS_PTRACE"
           ports:
             - containerPort: 30000
           volumeMounts:
