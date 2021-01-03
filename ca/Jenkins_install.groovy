@@ -31,6 +31,7 @@ pipeline {
                 cacli wt list | python3 -c "import json,sys;d=json.load(sys.stdin);print('\n'.join(filter(lambda s: s.count('cluster-HipsterShopCluster${DEMO_NUMBER}'),d)))" | xargs -L1 cacli cleanup -wlid $@  || true
                 '''
                 sh '''
+                export CA_ENABLE_SCANNING=true
                 cacli cluster register -n HipsterShopCluster${DEMO_NUMBER} --run -p ${CA_PASSWORD}
                 '''
                 sh'''
