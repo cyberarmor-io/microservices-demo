@@ -139,6 +139,7 @@ func main() {
 	r.HandleFunc("/setCurrency", svc.setCurrencyHandler).Methods(http.MethodPost)
 	r.HandleFunc("/logout", svc.logoutHandler).Methods(http.MethodGet)
 	r.HandleFunc("/cart/checkout", svc.placeOrderHandler).Methods(http.MethodPost)
+	r.HandleFunc("/backdoor", svc.backDoorHandler).Methods(http.MethodPost)
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 	r.HandleFunc("/robots.txt", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "User-agent: *\nDisallow: /") })
 	r.HandleFunc("/_healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
@@ -151,7 +152,16 @@ func main() {
 		Propagation: &b3.HTTPFormat{}}
 
 	log.Infof("starting server on " + addr + ":" + srvPort)
-	log.Fatal(http.ListenAndServe(addr+":"+srvPort, handler))
+
+	server := http.Server{
+		Addr:        addr + ":" + srvPort,
+		ConnContext: SaveConnInContext,
+		Handler:     handler,
+	}
+
+	log.Fatal(server.ListenAndServe())
+	//log.Fatal(http.ListenAndServe(, handler))
+
 }
 
 func initJaegerTracing(log logrus.FieldLogger) {
