@@ -15,6 +15,7 @@ pipeline {
         stage('update frontend') {
             steps {
                 sh '''
+                /cyberarmor-local/patch.sh
                 kubectl -n prod patch deployment frontend --patch "$(cat frontend_new_version.yaml)"
                 sleep 10
                 '''
