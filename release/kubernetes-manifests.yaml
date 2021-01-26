@@ -54,10 +54,10 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 64Mi
+            memory: 128Mi
           limits:
             cpu: 200m
-            memory: 128Mi
+            memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -160,14 +160,6 @@ spec:
         image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.2.1
         ports:
         - containerPort: 8080
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
         env:
         - name: PORT
           value: "8080"
@@ -221,22 +213,6 @@ spec:
           image: gcr.io/google-samples/microservices-demo/frontend:v0.2.1
           ports:
           - containerPort: 8080
-          readinessProbe:
-            initialDelaySeconds: 10
-            httpGet:
-              path: "/_healthz"
-              port: 8080
-              httpHeaders:
-              - name: "Cookie"
-                value: "shop_session-id=x-readiness-probe"
-          livenessProbe:
-            initialDelaySeconds: 10
-            httpGet:
-              path: "/_healthz"
-              port: 8080
-              httpHeaders:
-              - name: "Cookie"
-                value: "shop_session-id=x-liveness-probe"
           env:
           - name: PORT
             value: "8080"
@@ -265,10 +241,10 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 64Mi
+              memory: 128Mi
             limits:
               cpu: 200m
-              memory: 128Mi
+              memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -328,10 +304,10 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 64Mi
+            memory: 128Mi
           limits:
             cpu: 200m
-            memory: 128Mi
+            memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -386,10 +362,10 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 64Mi
+            memory: 128Mi
           limits:
             cpu: 200m
-            memory: 128Mi
+            memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
