@@ -10,3 +10,14 @@
 * Update the frontend image from [quay.io](https://quay.io/repository/armosec/demo-frontend?tab=tags)
 * Run update with demo/patch-new-version.sh
 * Show falco logs demo/falco_logs.sh
+## ARMO demo
+### Prerequisite 
+* Have your 'kubectl' point to the cluster on which you want to work
+* Login with cacli
+### Installation
+* Run demo/install-hipster.sh
+* Run demo/protect-hipster.sh
+### During demo
+* Show Hipster shop (URL in ingress list)
+* Update the frontend image from [quay.io](https://quay.io/repository/armosec/demo-frontend?tab=tags)
+* Run update with demo/patch-new-version.sh
