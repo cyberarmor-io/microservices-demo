@@ -3,4 +3,4 @@ spec:
     spec:
       containers:
       - name: server
-        image: quay.io/armosec/demo-frontend:evil.4
+        image: quay.io/armosec/demo-frontend:v0.2.2
