@@ -7,7 +7,7 @@ else
        exit 1
 fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-CLUSTER=`kubectl config current-context`
+CLUSTER=`kubectl config current-context | sed "s/[\.,@]/-/g"`
 cacli cluster register --run -n $CLUSTER 
 sleep 120
 cacli secp create -sid sid://cluster-$CLUSTER/namespace-hipster/secret-top-secret
