@@ -852,6 +852,8 @@ spec:
         - name: monitor
           image: quay.io/armosec/demoservice:v1-debian
           env:
+            - name: SERVER_PORT
+              value: "80"
             - name: THREAD_TIMEOUT
               value: "10"
             - name: SLEEP_DURATION
