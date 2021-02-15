@@ -49,12 +49,12 @@ spec:
           value: "1"
         readinessProbe:
           periodSeconds: 10
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+          tcpSocket:
+            port: 8080
         livenessProbe:
           periodSeconds: 10
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+          tcpSocket:
+            port: 8080
         resources:
           requests:
             cpu: 100m
@@ -96,11 +96,13 @@ spec:
           ports:
           - containerPort: 5050
           readinessProbe:
-            exec:
-              command: ["/bin/grpc_health_probe", "-addr=:5050"]
+            periodSeconds: 10
+            tcpSocket:
+              port: 5050
           livenessProbe:
-            exec:
-              command: ["/bin/grpc_health_probe", "-addr=:5050"]
+            periodSeconds: 10
+            tcpSocket:
+              port: 5050
           env:
           - name: PORT
             value: "5050"
@@ -356,11 +358,13 @@ spec:
         - name: PORT
           value: "50051"
         readinessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+          periodSeconds: 10
+          tcpSocket:
+            port: 50051
         livenessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+          periodSeconds: 10
+          tcpSocket:
+            port: 50051
         resources:
           requests:
             cpu: 100m
@@ -414,11 +418,13 @@ spec:
         # - name: JAEGER_SERVICE_ADDR
         #   value: "jaeger-collector:14268"
         readinessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:3550"]
+          periodSeconds: 10
+          tcpSocket:
+            port: 3550
         livenessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:3550"]
+          periodSeconds: 10
+          tcpSocket:
+            port: 3550
         resources:
           requests:
             cpu: 100m
@@ -476,13 +482,13 @@ spec:
             memory: 128Mi
         readinessProbe:
           initialDelaySeconds: 15
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
+          tcpSocket:
+            port: 7070
         livenessProbe:
           initialDelaySeconds: 15
           periodSeconds: 10
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
+          tcpSocket:
+            port: 7070
 ---
 apiVersion: v1
 kind: Service
@@ -563,11 +569,13 @@ spec:
         # - name: DISABLE_DEBUGGER
         #   value: "1"
         readinessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:7000"]
+          periodSeconds: 10
+          tcpSocket:
+            port: 7000
         livenessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:7000"]
+          periodSeconds: 10
+          tcpSocket:
+            port: 7000
         resources:
           requests:
             cpu: 100m
@@ -625,11 +633,12 @@ spec:
         #   value: "jaeger-collector:14268"
         readinessProbe:
           periodSeconds: 10
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+          tcpSocket:
+            port: 50051
         livenessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+          periodSeconds: 10
+          tcpSocket:
+            port: 50051
         resources:
           requests:
             cpu: 100m
@@ -756,13 +765,13 @@ spec:
         readinessProbe:
           initialDelaySeconds: 20
           periodSeconds: 15
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:9555"]
+          tcpSocket:
+            port: 9555
         livenessProbe:
           initialDelaySeconds: 20
           periodSeconds: 15
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:9555"]
+          tcpSocket:
+            port: 9555
 ---
 apiVersion: v1
 kind: Service
