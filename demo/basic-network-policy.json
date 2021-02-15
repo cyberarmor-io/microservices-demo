@@ -1,0 +1,44 @@
+{
+    "name": "EKS-fargate-test-demo-hipster-x-eu-central-1-eksctl-io",
+    "policyType": "explicit",
+    "permissions": "allow",
+    "enforcementAction": "block",
+    "serverList": [
+        {
+            "designatorType": "attribute",
+            "attributes": {
+                "namespace": "hipster",
+                "cluster": "EKS-fargate-test-demo-hipster-x-eu-central-1-eksctl-io"
+            },
+            "groupName": "",
+            "ports": [],
+            "k8sServiceName": "",
+            "k8sServiceIP": "",
+            "k8sServicePorts": [],
+            "ipRanges": [],
+            "portRanges": [
+                {
+                    "start": 0,
+                    "end": 65535
+                }
+            ],
+            "servicePortRanges": [
+                {
+                    "start": 80,
+                    "end": 65535
+                }
+            ]
+        }
+    ],
+    "clientList": [
+        {
+            "designatorType": "attribute",
+            "wlid": "",
+            "wildwlid": "",
+            "attributes": {
+                "cluster": "EKS-fargate-test-demo-hipster-x-eu-central-1-eksctl-io",
+                "namespace": "hipster"
+            }
+        }
+    ]
+}
