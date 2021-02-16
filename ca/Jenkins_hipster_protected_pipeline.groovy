@@ -65,7 +65,7 @@ pipeline {
                 kubectl -n prod create secret docker-registry caregcred --docker-server=dreg.eust0.cyberarmorsoft.com:443 --docker-username=${DOCKER_USER} --docker-password=${DOCKER_PASSWORD} --docker-email=bhirschb@cyberarmor.io || truekubectl create secret docker-registry my-secret --docker-server=dreg.eust0.cyberarmorsoft.com:443 --docker-username=${DOCKER_USER} --docker-password=${DOCKER_PASSWORD} --docker-email=bhirschb@cyberarmor.io || true
                 kubectl -n prod apply -f release/kubernetes-manifests.yaml
                 kubectl -n prod delete secret nginx-ssl || true
-                kubectl -n prod create secret generic nginx-ssl --from-file=tls.key=ca-nginx-tls.key.enc --from-file=tls.crt=ca-nginx-tls.crt.enc
+                kubectl -n prod create secret generic nginx-ssl --from-file=tls.key=ca-nginx-tls.key --from-file=tls.crt=ca-nginx-tls.crt
                 kubectl -n prod apply -f ingress.yaml
                 '''
             }
@@ -74,12 +74,7 @@ pipeline {
         stage('liveliness test') {
             steps {
                 sh '''
-                sleep 160
-                kubectl -n prod delete pod $(kubectl -n prod get pods | grep cartservice | awk '{print $1}')  || true
-
-                kubectl -n prod delete pod $(kubectl -n dev get pods | grep recommendationservice | awk '{print $1}') || true
-                kubectl -n prod delete pod $(kubectl -n prod get pods | grep recommendationservice | awk '{print $1}')  || true
-                sleep 10
+                sleep 20
                 kubectl -n prod delete pod $(kubectl -n dev get pods | grep frontend | awk '{print $1}')  || true
                 kubectl -n prod delete pod $(kubectl -n prod get pods | grep frontend | awk '{print $1}')  || true
                 '''
