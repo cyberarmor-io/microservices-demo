@@ -1,5 +1,5 @@
 {
-    "name": "HipsterShopCluster${DEMO_NUMBER}-Basic-Policy",
+    "name": "${CLUSTER}-Basic-Policy",
     "policyType": "basic",
     "permissions": "allow",
     "enforcementAction": "block",
@@ -8,7 +8,7 @@
             "designatorType": "attribute",
             "attributes": {
                 "namespace": "prod",
-                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
+                "cluster": "${CLUSTER}"
             },
             "ipRanges": [],
             "portRanges": [
@@ -24,7 +24,7 @@
             "designatorType": "attribute",
             "attributes": {
                 "namespace": "prod",
-                "cluster": "HipsterShopCluster${DEMO_NUMBER}"
+                "cluster": "${CLUSTER}"
             }
         }
     ]

@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-CLUSTER=HipsterShopCluster$DEMO_NUMBER
+
 NAMESPACE=dev
 NAMESPACE_PROD=prod
 DEPLOYMENT=redis-cart

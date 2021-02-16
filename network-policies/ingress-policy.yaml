@@ -1,11 +1,11 @@
 {
-    "name": "HipsterShopCluster${DEMO_NUMBER}-A-Ingress-Policy",
+    "name": "${CLUSTER}-A-Ingress-Policy",
     "policyType": "ingress",
     "permissions": "allow",
     "designators": [
         {
             "designatorType": "wlid",
-            "wlid": "wlid://cluster-HipsterShopCluster${DEMO_NUMBER}/namespace-prod/deployment-nginx-ingress"
+            "wlid": "wlid://cluster-${CLUSTER}/namespace-prod/deployment-nginx-ingress"
         }
     ],
     "peers": [
