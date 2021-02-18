@@ -7,8 +7,8 @@ else
        exit 1
 fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-#CLUSTER=`kubectl config current-context | sed "s/[\:\.\/,@]/-/g"`
-CLUSTER=hipster-demo
+#CLUSTER=`kubectl config current-context | sed "s/[\:\.\/,@,_]/-/g"`
+CLUSTER=gkedemo
 NAMESPACE=hipster
 cacli cluster register --run -n $CLUSTER 
 sleep 120
